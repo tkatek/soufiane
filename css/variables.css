@@ -1,0 +1,15 @@
+:root {
+  color-scheme: dark;
+  --color-bg: #070911;
+  --color-surface: #0c1020;
+  --color-text: #f2f3fa;
+  --color-muted: #a4a8bc;
+  --color-subtle: #697089;
+  --color-primary: #645cff;
+  --color-primary-bright: #887dff;
+  --color-border: rgb(157 165 207 / 15%);
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --container: 1340px;
+  --gutter: clamp(1.25rem, 5.5vw, 5rem);
+}
