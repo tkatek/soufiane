@@ -89,66 +89,42 @@
         <section class="hero" id="home" aria-labelledby="hero-title">
           <div class="hero__atmosphere" aria-hidden="true"></div>
 
-          <svg class="hero__mesh" viewBox="0 0 1100 900" fill="none" aria-hidden="true">
-            <defs>
-              <pattern id="mesh-dots" width="5" height="5" patternUnits="userSpaceOnUse">
-                <circle cx="1.2" cy="1.2" r=".8" fill="#E8E8E8" />
-              </pattern>
-              <radialGradient id="mesh-fade">
-                <stop offset="0" stop-color="white" stop-opacity=".88" />
-                <stop offset=".62" stop-color="white" stop-opacity=".7" />
-                <stop offset="1" stop-color="white" stop-opacity="0" />
-              </radialGradient>
-              <mask id="mesh-mask">
-                <path d="M395 99C540 12 705 53 762 125C851 88 1000 95 1042 180C1092 282 1009 369 1021 452C1050 566 987 674 902 707C818 785 681 821 565 773C447 818 326 765 293 671C220 599 221 482 278 402C231 293 281 159 395 99Z" fill="url(#mesh-fade)" />
-              </mask>
-            </defs>
-            <g mask="url(#mesh-mask)">
-              <rect x="180" y="25" width="900" height="800" fill="url(#mesh-dots)" />
-              <g stroke="#D6D6D6" stroke-opacity=".32" stroke-width="1" stroke-dasharray="1 5">
-                <path d="M235 181C386 132 502 171 627 135C765 95 870 128 1034 84" />
-                <path d="M218 228C364 180 514 224 642 181C772 137 916 185 1050 132" />
-                <path d="M205 277C352 230 503 267 650 225C790 185 922 232 1061 183" />
-                <path d="M199 327C343 276 510 317 656 276C796 236 937 281 1061 232" />
-                <path d="M204 378C348 328 512 366 660 326C807 286 941 331 1066 281" />
-                <path d="M215 429C354 380 525 418 668 377C812 336 953 380 1061 333" />
-                <path d="M224 482C366 432 530 470 680 429C819 391 954 428 1057 384" />
-                <path d="M229 535C377 485 540 524 687 483C828 444 951 479 1047 437" />
-                <path d="M243 588C387 539 547 579 700 537C832 501 949 531 1032 492" />
-                <path d="M265 641C410 588 570 635 713 588C846 544 950 581 1005 547" />
-                <path d="M294 692C437 640 585 682 732 641C858 605 941 631 973 604" />
-                <path d="M335 740C476 687 614 728 751 688C863 655 923 676 942 656" />
-                <path d="M289 161C307 284 351 377 340 473C328 576 396 679 448 756" />
-                <path d="M365 111C380 244 416 347 402 459C390 567 457 689 516 780" />
-                <path d="M449 80C462 219 485 333 473 451C462 572 524 698 581 790" />
-                <path d="M536 62C547 211 555 331 548 457C541 579 598 706 649 791" />
-                <path d="M624 60C625 207 623 332 624 460C623 586 673 703 715 777" />
-                <path d="M713 70C701 210 693 333 702 459C709 583 750 686 785 752" />
-                <path d="M800 88C778 217 765 334 779 452C791 564 820 655 848 712" />
-                <path d="M884 112C852 226 838 334 854 440C871 539 889 615 907 665" />
-                <path d="M962 142C920 246 906 345 920 431C933 514 949 576 964 616" />
-              </g>
-            </g>
-          </svg>
-
-          <div class="hero__content" data-reveal>
-            <p class="hero__eyebrow"><span></span> Independent developer&nbsp; / &nbsp;Marrakech, Morocco</p>
+          <div class="hero__copy" data-reveal>
+            <p class="hero__availability"><span aria-hidden="true"></span> Available for new opportunities</p>
             <h1 class="hero__title" id="hero-title">
-              <span class="hero__title-line">FULL-STACK</span>
-              <span class="hero__title-line hero__title-line--muted">DEVELOPER</span>
+              Building digital<br>
+              experiences that<br>
+              <span>feel different.</span>
             </h1>
-            <p class="hero__signature">Soufiane El Khassabi <span>/</span> Web Developer</p>
+            <p class="hero__description">
+              I'm a full-stack developer who designs and builds modern web experiences.
+              From idea to deployment, I focus on clean code, thoughtful design, and
+              real-world impact.
+            </p>
+            <div class="hero__actions">
+              <a class="hero__button hero__button--primary" href="#projects">Explore Projects <span aria-hidden="true">→</span></a>
+              <a class="hero__button hero__button--secondary" href="#contact">Get in Touch <span aria-hidden="true">→</span></a>
+            </div>
           </div>
 
-          <div class="hero__bottom" data-reveal>
-            <p class="hero__manifesto"><span>//</span> SCALABLE WEB SOLUTIONS.</p>
-            <p class="hero__description">
-              I’m a full-stack developer focused on building efficient, thoughtful
-              digital experiences — from the first line of code to the final detail.
-            </p>
-            <a class="hero__explore" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
-            <span class="hero__coordinates" aria-hidden="true">31°37' N &nbsp; 7°59' W</span>
-          </div>
+          <figure class="hero__artwork">
+            <img
+              class="hero__artwork-image"
+              src="assets/images/hero-developer-artwork.png"
+              alt="Glowing blue 3D rings with glass panels showcasing modern web technologies"
+              width="768"
+              height="960"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            >
+          </figure>
+
+          <a class="hero__scroll" href="#experience">
+            <span class="hero__scroll-icon" aria-hidden="true"></span>
+            <span>Scroll to explore</span>
+            <span class="hero__scroll-rule" aria-hidden="true"></span>
+          </a>
         </section>
 
         <section class="experience" id="experience" aria-labelledby="experience-title">
