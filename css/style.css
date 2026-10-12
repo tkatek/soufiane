@@ -611,10 +611,29 @@ a {
 }
 
 .experience__layout {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(15rem, .85fr) minmax(0, 1.35fr);
   gap: clamp(2.5rem, 8vw, 8rem);
   padding-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.experience__layout::before {
+  position: absolute;
+  z-index: -1;
+  top: 38%;
+  left: -8%;
+  width: min(48%, 38rem);
+  aspect-ratio: 1;
+  background:
+    radial-gradient(ellipse at center, rgb(255 255 255 / 2.5%), transparent 68%),
+    radial-gradient(circle, rgb(232 232 232 / 30%) .65px, transparent .9px);
+  background-size: auto, 5px 5px;
+  mask-image: radial-gradient(ellipse at center, #000 12%, rgb(0 0 0 / 75%) 48%, transparent 73%);
+  opacity: .32;
+  content: "";
+  pointer-events: none;
 }
 
 .experience__story {
@@ -692,6 +711,74 @@ a {
   font-family: var(--mono);
   font-size: .8rem;
   line-height: 1.7;
+}
+
+.experience__sketch {
+  position: relative;
+  max-width: 28rem;
+  margin: 1.35rem 0 0;
+  padding: .5rem .2rem 0;
+  color: #8e8e8e;
+}
+
+.experience__sketch svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.experience__sketch-window,
+.experience__sketch-phone {
+  stroke: #777;
+  stroke-width: 1.15;
+}
+
+.experience__sketch-window rect,
+.experience__sketch-phone rect {
+  fill: rgb(255 255 255 / 1.5%);
+}
+
+.experience__sketch-window path,
+.experience__sketch-phone path,
+.experience__sketch-orbit,
+.experience__sketch-link,
+.experience__sketch-base {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.1;
+}
+
+.experience__sketch-orbit {
+  color: #444;
+}
+
+.experience__sketch-link {
+  color: #626262;
+  stroke-dasharray: 3 5;
+}
+
+.experience__sketch-spark {
+  fill: #bdbdbd;
+  opacity: .75;
+}
+
+.experience__sketch-base {
+  color: #585858;
+}
+
+.experience__sketch figcaption {
+  margin: -.25rem 0 0 1.3rem;
+  color: #777;
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .1em;
+}
+
+.experience__sketch figcaption span {
+  padding-inline: .3rem;
+  color: #b4b4b4;
 }
 
 .experience__details {
@@ -850,8 +937,24 @@ a {
   list-style: none;
 }
 
+.experience__tech-groups {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.experience__tech-group h4 {
+  margin: 0 0 .65rem;
+  color: #a9a9a9;
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
 .experience__technologies li {
   display: flex;
+  min-width: 0;
   min-height: 4.3rem;
   align-items: center;
   gap: .7rem;
@@ -860,6 +963,7 @@ a {
   background: linear-gradient(145deg, rgb(255 255 255 / 3%), rgb(255 255 255 / .5%));
   color: #e0e0e0;
   font-size: .78rem;
+  overflow-wrap: anywhere;
   transition: transform .2s ease, border-color .2s ease, background-color .2s ease;
 }
 
@@ -869,14 +973,24 @@ a {
   background-color: rgb(255 255 255 / 2%);
 }
 
-.experience__technologies img {
+.experience__technologies img,
+.experience__tech-icon {
   width: 1.6rem;
   height: 1.6rem;
   flex: 0 0 auto;
   object-fit: contain;
 }
 
-.experience__technologies li:last-child img {
+.experience__tech-icon {
+  fill: none;
+  color: #bdbdbd;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.experience__technologies img[src*="/github/"] {
   filter: invert(1);
 }
 
@@ -2185,6 +2299,10 @@ html.js-reveal [data-reveal].is-visible {
     padding-top: 1.8rem;
   }
 
+  .experience__layout::before {
+    display: none;
+  }
+
   .experience__story {
     max-width: none;
   }
@@ -2203,8 +2321,17 @@ html.js-reveal [data-reveal].is-visible {
     font-size: .74rem;
   }
 
+  .experience__tech-groups {
+    gap: 1.25rem;
+  }
+
   .experience__principle {
     margin-top: 1.25rem;
+  }
+
+  .experience__sketch {
+    max-width: 23rem;
+    margin-top: 1rem;
   }
 
   .experience__group {
