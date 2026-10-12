@@ -738,15 +738,9 @@ a {
 .experience__sketch {
   position: relative;
   max-width: 28rem;
-  margin: 1.75rem 0 0;
-  padding: .8rem .85rem .7rem;
-  overflow: hidden;
-  border: 1px solid rgb(var(--ice-blue) / 19%);
-  border-radius: 1rem;
-  background:
-    radial-gradient(ellipse at 69% 27%, rgb(var(--ice-blue) / 13%), transparent 45%),
-    linear-gradient(145deg, rgb(14 24 36 / 96%), rgb(7 11 17 / 98%));
-  box-shadow: inset 0 1px rgb(255 255 255 / 4%), 0 16px 45px rgb(0 0 0 / 18%);
+  margin: 1.35rem 0 0;
+  padding: .5rem .2rem 0;
+  color: #8e8e8e;
 }
 
 .experience__sketch svg {
@@ -758,101 +752,55 @@ a {
 
 .experience__sketch-window,
 .experience__sketch-phone {
-  stroke: #93bce9;
-  stroke-width: 1.7;
+  stroke: #777;
+  stroke-width: 1.15;
 }
 
 .experience__sketch-window rect,
 .experience__sketch-phone rect {
-  fill: rgb(var(--ice-blue) / 3%);
+  fill: rgb(255 255 255 / 1.5%);
 }
 
 .experience__sketch-window path,
 .experience__sketch-phone path,
 .experience__sketch-orbit,
-.experience__sketch-arrow,
-.experience__sketch-pencil,
-.experience__sketch-pencil-detail,
-.experience__sketch-bulb path,
+.experience__sketch-link,
 .experience__sketch-base {
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.7;
+  stroke-width: 1.1;
 }
 
 .experience__sketch-orbit {
-  color: #31516e;
-  stroke-dasharray: 2 7;
+  color: #444;
 }
 
-.experience__sketch-arrow {
-  color: #72aee9;
-  stroke-width: 2;
-}
-
-.experience__sketch-window-accent,
-.experience__sketch-phone-accent {
-  color: #75d5ce;
-}
-
-.experience__sketch-panel {
-  fill: rgb(95 163 219 / 11%);
-  stroke: #6baad9;
-}
-
-.experience__sketch-dot {
-  fill: rgb(116 218 210 / 22%);
-  stroke: #78d8d0;
-}
-
-.experience__sketch-pencil {
-  color: #a8d9e9;
-  fill: rgb(107 184 219 / 20%);
-}
-
-.experience__sketch-pencil-detail {
-  color: #75d5ce;
-  stroke-width: 1.35;
-}
-
-.experience__sketch-bulb {
-  color: #8abcf0;
-  stroke-width: 1.7;
-}
-
-.experience__sketch-bulb-glow {
-  color: #76dbd2;
-  stroke-width: 2;
-}
-
-.experience__sketch-base {
-  color: #577da0;
-  stroke-width: 1.3;
+.experience__sketch-link {
+  color: #626262;
+  stroke-dasharray: 3 5;
 }
 
 .experience__sketch-spark {
-  fill: #a9d9ed;
-  opacity: .9;
+  fill: #bdbdbd;
+  opacity: .75;
+}
+
+.experience__sketch-base {
+  color: #585858;
 }
 
 .experience__sketch figcaption {
-  margin: -.1rem 0 0 .15rem;
-  color: #9ab6d2;
+  margin: -.25rem 0 0 1.3rem;
+  color: #777;
   font-family: var(--mono);
-  font-size: .54rem;
-  letter-spacing: .12em;
+  font-size: .58rem;
+  letter-spacing: .1em;
 }
 
 .experience__sketch figcaption span {
-  margin-right: .6rem;
-  color: #6dd2c8;
-}
-
-.experience__sketch figcaption i {
-  padding-inline: .35rem;
-  color: #6fb5e5;
-  font-style: normal;
+  padding-inline: .3rem;
+  color: #b4b4b4;
 }
 
 .experience__build-card {
@@ -1439,15 +1387,29 @@ html.js-reveal .experience__build-card.is-visible .experience__build-steps li:nt
   transition: transform .65s cubic-bezier(.2,.7,.2,1);
 }
 
-.project-tile__visual--contain .project-tile__photo {
+.project-tile__photo--contain {
   inset: 7% 20%;
   width: 60%;
   height: 86%;
   object-fit: contain;
 }
 
+.project-tile__photo--alternate {
+  opacity: 0;
+}
+
 .project-tile:hover .project-tile__photo {
   transform: scale(1.045);
+}
+
+.project-tile:hover .project-tile__photo--primary,
+.project-tile:focus-visible .project-tile__photo--primary {
+  opacity: 0;
+}
+
+.project-tile:hover .project-tile__photo--alternate,
+.project-tile:focus-visible .project-tile__photo--alternate {
+  opacity: 1;
 }
 
 .project-tile--featured .project-tile__visual,
