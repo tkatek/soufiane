@@ -3,131 +3,414 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Soufiane is a full-stack developer from Marrakech building thoughtful digital products.">
-    <meta name="theme-color" content="#070911">
-    <title>Soufiane El Khassabi — Full-Stack Developer</title>
-    <link rel="stylesheet" href="css/globals.css">
+    <meta name="description" content="Soufiane El Khassabi — full-stack developer creating thoughtful web experiences.">
+    <meta name="theme-color" content="#050505">
+    <title>Soufiane El Khassabi | Full-Stack Developer</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <main id="app">
-      <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero__bg" aria-hidden="true">
-          <div class="hero__glow hero__glow--left"></div>
-          <div class="hero__glow hero__glow--right"></div>
-          <div class="hero__sunset"></div>
-          <svg class="hero__orbit" viewBox="0 0 800 800" fill="none">
-            <circle cx="400" cy="400" r="380" stroke="url(#orbitGrad)" stroke-width="1.2" />
-            <circle cx="400" cy="400" r="300" stroke="url(#orbitGrad)" stroke-width=".8" opacity=".6" />
-            <defs>
-              <linearGradient id="orbitGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#6d5efc" stop-opacity=".9" />
-                <stop offset="1" stop-color="#6d5efc" stop-opacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <span class="hero__dot" style="--x:34%;--y:20%"></span>
-          <span class="hero__dot" style="--x:48%;--y:16%"></span>
-          <span class="hero__dot" style="--x:27%;--y:62%"></span>
-        </div>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="wordmark" href="#home" aria-label="Soufiane, home">SOUFIANE<span>.</span></a>
 
-        <div class="hero__container">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation">
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-navigation" id="site-navigation" aria-label="Main navigation">
+          <a class="site-navigation__link is-active" href="#home"><span>01</span> Home</a>
+          <a class="site-navigation__link" href="#experience"><span>02</span> Experience</a>
+          <a class="site-navigation__link" href="#projects"><span>03</span> Projects</a>
+          <a class="site-navigation__link" href="#blog"><span>04</span> Blog</a>
+          <a class="site-navigation__link" href="#contact"><span>05</span> Contact me</a>
+        </nav>
+
+        <span class="header-index" aria-hidden="true">PORTFOLIO&nbsp; / &nbsp;2026</span>
+      </header>
+
+      <main>
+        <section class="hero" id="home" aria-labelledby="hero-title">
+          <div class="hero__atmosphere" aria-hidden="true"></div>
+
+          <svg class="hero__mesh" viewBox="0 0 1100 900" fill="none" aria-hidden="true">
+            <defs>
+              <pattern id="mesh-dots" width="5" height="5" patternUnits="userSpaceOnUse">
+                <circle cx="1.2" cy="1.2" r=".8" fill="#E8E8E8" />
+              </pattern>
+              <radialGradient id="mesh-fade">
+                <stop offset="0" stop-color="white" stop-opacity=".88" />
+                <stop offset=".62" stop-color="white" stop-opacity=".7" />
+                <stop offset="1" stop-color="white" stop-opacity="0" />
+              </radialGradient>
+              <mask id="mesh-mask">
+                <path d="M395 99C540 12 705 53 762 125C851 88 1000 95 1042 180C1092 282 1009 369 1021 452C1050 566 987 674 902 707C818 785 681 821 565 773C447 818 326 765 293 671C220 599 221 482 278 402C231 293 281 159 395 99Z" fill="url(#mesh-fade)" />
+              </mask>
+            </defs>
+            <g mask="url(#mesh-mask)">
+              <rect x="180" y="25" width="900" height="800" fill="url(#mesh-dots)" />
+              <g stroke="#D6D6D6" stroke-opacity=".32" stroke-width="1" stroke-dasharray="1 5">
+                <path d="M235 181C386 132 502 171 627 135C765 95 870 128 1034 84" />
+                <path d="M218 228C364 180 514 224 642 181C772 137 916 185 1050 132" />
+                <path d="M205 277C352 230 503 267 650 225C790 185 922 232 1061 183" />
+                <path d="M199 327C343 276 510 317 656 276C796 236 937 281 1061 232" />
+                <path d="M204 378C348 328 512 366 660 326C807 286 941 331 1066 281" />
+                <path d="M215 429C354 380 525 418 668 377C812 336 953 380 1061 333" />
+                <path d="M224 482C366 432 530 470 680 429C819 391 954 428 1057 384" />
+                <path d="M229 535C377 485 540 524 687 483C828 444 951 479 1047 437" />
+                <path d="M243 588C387 539 547 579 700 537C832 501 949 531 1032 492" />
+                <path d="M265 641C410 588 570 635 713 588C846 544 950 581 1005 547" />
+                <path d="M294 692C437 640 585 682 732 641C858 605 941 631 973 604" />
+                <path d="M335 740C476 687 614 728 751 688C863 655 923 676 942 656" />
+                <path d="M289 161C307 284 351 377 340 473C328 576 396 679 448 756" />
+                <path d="M365 111C380 244 416 347 402 459C390 567 457 689 516 780" />
+                <path d="M449 80C462 219 485 333 473 451C462 572 524 698 581 790" />
+                <path d="M536 62C547 211 555 331 548 457C541 579 598 706 649 791" />
+                <path d="M624 60C625 207 623 332 624 460C623 586 673 703 715 777" />
+                <path d="M713 70C701 210 693 333 702 459C709 583 750 686 785 752" />
+                <path d="M800 88C778 217 765 334 779 452C791 564 820 655 848 712" />
+                <path d="M884 112C852 226 838 334 854 440C871 539 889 615 907 665" />
+                <path d="M962 142C920 246 906 345 920 431C933 514 949 576 964 616" />
+              </g>
+            </g>
+          </svg>
+
           <div class="hero__content">
-            <p class="hero__eyebrow"><span aria-hidden="true"></span> Full-Stack Developer</p>
+            <p class="hero__eyebrow"><span></span> Independent developer&nbsp; / &nbsp;Marrakech, Morocco</p>
             <h1 class="hero__title" id="hero-title">
-              <span class="hero__title-line">Building Digital</span>
-              <span class="hero__title-line">Products That</span>
-              <span class="hero__title-line hero__title-accent">Matter.</span>
+              <span class="hero__title-line">FULL-STACK</span>
+              <span class="hero__title-line hero__title-line--muted">DEVELOPER</span>
             </h1>
-            <p class="hero__text">
-              I'm Soufiane, a full-stack developer from Marrakech. I build modern
-              web applications with clean code, thoughtful user experiences, and
-              real business impact.
-            </p>
-            <div class="hero__actions">
-              <a class="btn btn--primary" href="#projects">
-                View My Projects
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </a>
-              <a class="btn btn--ghost" href="assets/cv.pdf" download>
-                Download CV
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14" /></svg>
-              </a>
-            </div>
-            <ul class="hero__stats" aria-label="A few highlights">
-              <li><strong>5+</strong><span>Completed Projects</span></li>
-              <li><strong>2+</strong><span>Years Experience</span></li>
-              <li><strong>100%</strong><span>Passion</span></li>
-            </ul>
+            <p class="hero__signature">Soufiane El Khassabi <span>/</span> Web Developer</p>
           </div>
 
-          <div class="hero__visual" aria-hidden="true">
-            <div class="hero__visual-glow" aria-hidden="true"></div>
-            <div class="monitor">
-              <div class="monitor__screen">
-                <div class="editor__topbar"><span></span><span></span><span></span><p>soufiane.dev</p></div>
-                <div class="editor__workspace">
-                  <aside class="editor__side" aria-hidden="true">
-                    <p class="editor__head">EXPLORER</p>
-                    <ul>
-                      <li class="editor__folder">▾ app</li>
-                      <li>　▸ components</li>
-                      <li>　▸ pages</li>
-                      <li class="editor__folder">▾ database</li>
-                      <li>　▸ migrations</li>
-                      <li class="editor__folder">▾ routes</li>
-                      <li class="editor__file">　web.php</li>
-                      <li>　api.php</li>
-                      <li>package.json</li>
-                    </ul>
-                  </aside>
-                  <div class="editor__main">
-                    <p class="editor__tab"><span>◆</span> routes/web.php</p>
-                    <pre class="editor__code"><span class="editor__muted">01</span> <span class="editor__keyword">&lt;?php</span>
-<span class="editor__muted">02</span>
-<span class="editor__muted">03</span> <span class="editor__keyword">use</span> Illuminate\Support\Facades\Route;
-<span class="editor__muted">04</span>
-<span class="editor__muted">05</span> <span class="editor__comment">// Building digital products</span>
-<span class="editor__muted">06</span> <span class="editor__comment">// with care and purpose.</span>
-<span class="editor__muted">07</span>
-<span class="editor__muted">08</span> <span class="editor__class">Route</span>::<span class="editor__function">get</span>(<span class="editor__string">'/'</span>,
-<span class="editor__muted">09</span>  [<span class="editor__class">HomeController</span>::class,
-<span class="editor__muted">10</span>   <span class="editor__string">'index'</span>]);
-<span class="editor__muted">11</span>
-<span class="editor__muted">12</span> <span class="editor__comment">// Ready to ship ✦</span></pre>
-                    <div class="editor__status"><span>●</span> main &nbsp;·&nbsp; PHP &nbsp;·&nbsp; UTF-8</div>
-                  </div>
+          <div class="hero__bottom">
+            <p class="hero__manifesto"><span>//</span> SCALABLE WEB SOLUTIONS.</p>
+            <p class="hero__description">
+              I’m a full-stack developer focused on building efficient, thoughtful
+              digital experiences — from the first line of code to the final detail.
+            </p>
+            <a class="hero__explore" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
+            <span class="hero__coordinates" aria-hidden="true">31°37' N &nbsp; 7°59' W</span>
+          </div>
+        </section>
+
+        <section class="experience" id="experience" aria-labelledby="experience-title">
+          <div class="experience__inner">
+            <header class="experience__heading" data-reveal>
+              <p class="experience__eyebrow"><span>02</span> THE JOURNEY SO FAR</p>
+              <h2 class="experience__title" id="experience-title">Built through<br><span>curiosity.</span></h2>
+              <p class="experience__lead">From first questions about how the web works to building complete products for real people — every step has been part of the craft.</p>
+            </header>
+
+            <div class="experience__layout">
+              <div class="experience__story" data-reveal>
+                <ol class="experience__journey">
+                  <li>
+                    <span class="experience__journey-number">01</span>
+                    <div><h3>Curiosity became craft</h3><p>My journey began with questions about how digital products are made. Today, I turn ideas into useful, responsive web applications with care for clean code, thoughtful interfaces, and the people using them.</p></div>
+                  </li>
+                  <li>
+                    <span class="experience__journey-number">02</span>
+                    <div><h3>Building across the stack</h3><p>I work with Laravel, PHP, MySQL, JavaScript, and modern frontend tools. I’ve built authentication, dashboards, role-based features, APIs, and complete business workflows using MVC and Django-inspired patterns.</p></div>
+                  </li>
+                  <li>
+                    <span class="experience__journey-number">03</span>
+                    <div><h3>Growing through real work</h3><p>Client projects and teamwork taught me to listen, solve the right problem, welcome feedback, and deliver reliably. I’m continuing to explore deployment, Docker, CI/CD, automation, and AI-powered applications.</p></div>
+                  </li>
+                </ol>
+                <div class="experience__principle">
+                  <span aria-hidden="true">“</span>
+                  <p>Learn continuously. Build with purpose. Deliver work that matters.</p>
                 </div>
               </div>
-              <div class="monitor__chin"><span></span></div>
-              <div class="monitor__stand"></div>
-              <div class="monitor__base"></div>
-            </div>
 
-            <div class="phone" aria-hidden="true">
-              <div class="phone__camera"></div>
-              <div class="phone__screen">
-                <span class="phone__brand">✦ &nbsp; Riadsoq</span>
-                <div class="phone__image"></div>
-                <span class="phone__tag">Discover</span>
-                <strong>Authentic Moroccan<br>Artisan Products</strong>
-                <span class="phone__button">Explore collection</span>
+              <div class="experience__details">
+                <div class="experience__group" data-reveal>
+                  <div class="experience__group-heading">
+                    <span class="experience__icon" aria-hidden="true">01</span>
+                    <h3>Professional experience</h3>
+                  </div>
+                  <ol class="experience__timeline">
+                    <li class="experience__item">
+                      <span class="experience__marker" aria-hidden="true"></span>
+                      <div class="experience__item-top">
+                        <div><h4>Social Media Manager</h4><p class="experience__organization">Private company</p></div>
+                        <time>1 year</time>
+                      </div>
+                      <p class="experience__item-description">Planned digital content and publishing, grew audience engagement, and strengthened brand communication across social platforms.</p>
+                    </li>
+                    <li class="experience__item">
+                      <span class="experience__marker" aria-hidden="true"></span>
+                      <div class="experience__item-top">
+                        <div><h4>Sales Associate</h4><p class="experience__organization">Traditional retail</p></div>
+                        <time datetime="2022">2022 — 2023</time>
+                      </div>
+                      <p class="experience__item-description">Supported daily sales, customer service, stock management, and transactions — building a strong foundation in communication and problem-solving.</p>
+                    </li>
+                  </ol>
+                </div>
+
+                <div class="experience__group" data-reveal>
+                  <div class="experience__group-heading">
+                    <span class="experience__icon" aria-hidden="true">02</span>
+                    <h3>Technologies I use</h3>
+                  </div>
+                  <ul class="experience__technologies" aria-label="Technologies and tools">
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="" loading="lazy"><span>Laravel</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="" loading="lazy"><span>PHP</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="" loading="lazy"><span>MySQL</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="" loading="lazy"><span>JavaScript</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" loading="lazy"><span>React</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="" loading="lazy"><span>Tailwind CSS</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="" loading="lazy"><span>HTML5</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="" loading="lazy"><span>CSS3</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="" loading="lazy"><span>Django</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" loading="lazy"><span>Docker</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="" loading="lazy"><span>Git</span></li>
+                    <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" loading="lazy"><span>GitHub</span></li>
+                  </ul>
+                </div>
+
+                <div class="experience__group" data-reveal>
+                  <div class="experience__group-heading">
+                    <span class="experience__icon" aria-hidden="true">03</span>
+                    <h3>Selected projects</h3>
+                  </div>
+                  <ul class="experience__projects">
+                    <li><span>EduMeet</span><p>Online learning platform with courses, subscriptions, attendance, and payments.</p></li>
+                    <li><span>PowerGym</span><p>Gym membership, subscription, payment, and operations management.</p></li>
+                    <li><span>Guidify</span><p>Tour reservation platform connecting travelers with local guides.</p></li>
+                    <li><span>Real-Time Chat</span><p>Instant messaging application using WebSocket communication.</p></li>
+                    <li><span>SEO Web Application</span><p>Actionable site analysis and search optimization suggestions.</p></li>
+                    <li><span>Freelancers Manager</span><p>Project, task, client, and progress tracking for independent teams.</p></li>
+                  </ul>
+                </div>
+
+                <div class="experience__group experience__group--education" data-reveal>
+                  <div class="experience__group-heading">
+                    <span class="experience__icon" aria-hidden="true">04</span>
+                    <h3>Education</h3>
+                  </div>
+                  <ol class="experience__timeline">
+                    <li class="experience__item">
+                      <span class="experience__marker" aria-hidden="true"></span>
+                      <div class="experience__item-top">
+                        <div><h4>Specialized Technician Diploma</h4><p class="experience__organization">Software Development · ESSET, Morocco</p></div>
+                        <time>2024 — Present</time>
+                      </div>
+                    </li>
+                    <li class="experience__item">
+                      <span class="experience__marker" aria-hidden="true"></span>
+                      <div class="experience__item-top">
+                        <div><h4>Baccalaureate</h4><p class="experience__organization">Morocco</p></div>
+                        <time datetime="2023">2023</time>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
               </div>
             </div>
 
-            <div class="code-note" aria-hidden="true">Clean code.<br>Better products.<span>↗</span></div>
-            <div class="tech-chip tech-chip--react"><span>⚛</span> React</div>
-            <div class="tech-chip tech-chip--tailwind"><span>◈</span> Tailwind</div>
-            <div class="tech-chip tech-chip--php"><span>php</span> Laravel</div>
+            <footer class="experience__footer" data-reveal>
+              <span>ALWAYS LEARNING</span>
+              <p>My goal is to grow into an engineer who can take a digital product from idea to production.</p>
+              <span class="experience__footer-mark" aria-hidden="true">↘</span>
+            </footer>
           </div>
-        </div>
+        </section>
 
-        <a class="hero__scroll" href="#projects">
-          <span class="hero__mouse" aria-hidden="true"><i></i></span>
-          <span>Scroll to explore</span>
-          <span class="hero__scroll-line" aria-hidden="true"></span>
-        </a>
-      </section>
-    </main>
-    <script type="module" src="js/app.js"></script>
+        <section class="projects" id="projects" aria-labelledby="projects-title">
+          <div class="projects__inner">
+            <header class="projects__heading" data-reveal>
+              <p class="projects__eyebrow"><span>03</span> SELECTED WORK &amp; EXPERIMENTS</p>
+              <h2 class="projects__title" id="projects-title">Ideas, made<br><span>interactive.</span></h2>
+              <p class="projects__intro">A growing collection of products, platforms, concepts, and technical explorations. Detailed case studies will follow.</p>
+            </header>
+
+            <div class="projects__toolbar" data-reveal>
+              <p>PROJECT INDEX <span>— 17 ENTRIES</span></p>
+              <span>SELECT A PROJECT <span aria-hidden="true">↘</span></span>
+            </div>
+
+            <div class="projects__grid">
+              <a class="project-tile project-tile--featured" href="project/index.html?project=powergym" data-reveal>
+                <div class="project-tile__visual project-tile__visual--powergym" aria-hidden="true">
+                  <span class="project-tile__number">01 / 17</span>
+                  <div class="visual-powergym"><i></i><i></i><i></i><b></b></div>
+                  <span class="project-tile__visual-word">POWER<br>GYM</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">PROJECT CASE STUDY</span><h3>PowerGym</h3></div><span class="project-tile__open">VIEW PROJECT ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="project/index.html?project=marrakesh-beauty" data-reveal>
+                <div class="project-tile__visual project-tile__visual--beauty" aria-hidden="true">
+                  <span class="project-tile__number">02 / 17</span>
+                  <span class="visual-beauty__orb"></span><span class="visual-beauty__type">M B</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">PROJECT CASE STUDY</span><h3>Marrakesh Beauty</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="project/index.html?project=invoiceflow" data-reveal>
+                <div class="project-tile__visual project-tile__visual--invoice" aria-hidden="true">
+                  <span class="project-tile__number">03 / 17</span>
+                  <div class="visual-invoice"><span>INVOICE / OVERVIEW</span><b>InvoiceFlow</b><i></i><i></i><i></i></div>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">PROJECT CASE STUDY</span><h3>InvoiceFlow</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="project/index.html?project=riadsoq" data-reveal>
+                <div class="project-tile__visual project-tile__visual--riadsoq" aria-hidden="true">
+                  <span class="project-tile__number">04 / 17</span>
+                  <span class="visual-riadsoq__sun"></span><span class="visual-riadsoq__name">Riadsoq</span><span class="visual-riadsoq__caption">MADE WITH HERITAGE</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">PROJECT CASE STUDY</span><h3>Riadsoq</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://tkatek.github.io/remtoolanding-page/" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--remtoo" aria-hidden="true">
+                  <span class="project-tile__number">05 / 17</span>
+                  <span class="visual-remtoo__symbol">R<span>.</span></span><span class="visual-remtoo__line"></span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE PROJECT</span><h3>Remtoo</h3></div><span class="project-tile__open">LIVE SITE ↗</span></div>
+              </a>
+
+              <a class="project-tile project-tile--wide" href="project/index.html?project=boston-english-center" data-reveal>
+                <div class="project-tile__visual project-tile__visual--boston" aria-hidden="true">
+                  <span class="project-tile__number">06 / 17</span>
+                  <span class="visual-boston__letters">B<span>E</span>C</span>
+                  <span class="visual-boston__rule"></span>
+                  <span class="visual-boston__label">LEARN / GROW / CONNECT</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">PLATFORM CONTRIBUTION</span><h3>Boston English Center</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="project/index.html?project=blossom-word-bloom" data-reveal>
+                <div class="project-tile__visual project-tile__visual--blossom" aria-hidden="true">
+                  <span class="project-tile__number">07 / 17</span>
+                  <span class="visual-blossom__flower">✳</span><span class="visual-blossom__word">word bloom</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">PROJECT CASE STUDY</span><h3>Blossom / Word Bloom</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://tkatek.github.io/english-grammar-game/" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--grammar" aria-hidden="true">
+                  <span class="project-tile__number">08 / 17</span>
+                  <div class="visual-grammar"><span>A</span><span>?</span><span>✓</span><b>WORD<br>QUEST</b></div>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE GAME</span><h3>English Grammar Game</h3></div><span class="project-tile__open">PLAY ↗</span></div>
+              </a>
+
+              <a class="project-tile project-tile--wide" href="project/index.html?project=cursor-agency-concept" data-reveal>
+                <div class="project-tile__visual project-tile__visual--cursor" aria-hidden="true">
+                  <span class="project-tile__number">09 / 17</span>
+                  <span class="visual-cursor__word">CURSOR<span>®</span></span>
+                  <span class="visual-cursor__cross">+</span>
+                  <span class="visual-cursor__caption">DIGITAL STUDIO / CONCEPT</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">BUSINESS / AGENCY WEBSITE CONCEPT</span><h3>Cursor</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://amanartourism.com" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--amanar" aria-hidden="true">
+                  <span class="project-tile__number">10 / 17</span>
+                  <span class="visual-amanar__sun"></span><span class="visual-amanar__mountains"></span>
+                  <span class="visual-amanar__word">AMANAR</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE WEBSITE</span><h3>Tourism Amanar</h3></div><span class="project-tile__open">VISIT ↗</span></div>
+              </a>
+
+              <a class="project-tile project-tile--experiment" href="project/index.html?project=django-projects" data-reveal>
+                <div class="project-tile__visual project-tile__visual--django" aria-hidden="true">
+                  <span class="project-tile__number">11 / 17</span>
+                  <span class="visual-code__bracket">{ }</span>
+                  <span class="visual-code__label">DJANGO / PYTHON</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">FRAMEWORK EXPERIMENTS</span><h3>Django Projects</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile project-tile--experiment" href="project/index.html?project=laravel-saas-experiments" data-reveal>
+                <div class="project-tile__visual project-tile__visual--laravel" aria-hidden="true">
+                  <span class="project-tile__number">12 / 17</span>
+                  <span class="visual-code__laravel">L</span>
+                  <span class="visual-code__label">LARAVEL / SAAS</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">SAAS EXPERIMENTS</span><h3>Laravel SaaS Experiments</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile project-tile--experiment" href="project/index.html?project=n8n-automation-experiments" data-reveal>
+                <div class="project-tile__visual project-tile__visual--automation" aria-hidden="true">
+                  <span class="project-tile__number">13 / 17</span>
+                  <div class="visual-automation"><i></i><i></i><i></i><b>n8n</b></div>
+                  <span class="visual-code__label">WORKFLOWS / AUTOMATION</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">AUTOMATION EXPERIMENTS</span><h3>n8n Automation Experiments</h3></div><span class="project-tile__open">VIEW ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://tkatek.github.io/Definite-Dash-game/" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--definite-dash" aria-hidden="true">
+                  <span class="project-tile__number">14 / 17</span>
+                  <span class="visual-definite-dash__title">DEFINITE<br><span>DASH</span></span>
+                  <span class="visual-definite-dash__track"><i></i><i></i><i></i></span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE GAME</span><h3>Definite Dash</h3></div><span class="project-tile__open">PLAY ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://tkatek.github.io/parfume/" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--perfume" aria-hidden="true">
+                  <span class="project-tile__number">15 / 17</span>
+                  <span class="visual-perfume__bottle"><i></i><b></b></span>
+                  <span class="visual-perfume__word">PARFUM</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE ONLINE STORE</span><h3>Perfume Store</h3></div><span class="project-tile__open">SHOP ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://tkatek.github.io/cap-store1/" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--cap-store" aria-hidden="true">
+                  <span class="project-tile__number">16 / 17</span>
+                  <span class="visual-cap-store__cap"><i></i><b></b></span>
+                  <span class="visual-cap-store__word">CAP<br>STORE</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE ONLINE STORE</span><h3>Cap Store</h3></div><span class="project-tile__open">SHOP ↗</span></div>
+              </a>
+
+              <a class="project-tile" href="https://tkatek.github.io/Jewelry/" target="_blank" rel="noopener noreferrer" data-reveal>
+                <div class="project-tile__visual project-tile__visual--jewelry" aria-hidden="true">
+                  <span class="project-tile__number">17 / 17</span>
+                  <span class="visual-jewelry__ring"><i></i></span>
+                  <span class="visual-jewelry__word">JEWELRY</span>
+                  <span class="project-tile__arrow">↗</span>
+                </div>
+                <div class="project-tile__info"><div><span class="project-tile__type">LIVE ONLINE STORE</span><h3>Jewelry Store</h3></div><span class="project-tile__open">SHOP ↗</span></div>
+              </a>
+
+            </div>
+
+            <footer class="projects__footer" data-reveal>
+              <span>MORE DETAILS COMING SOON</span>
+              <p>Project stories, screenshots, and live links will be added as each case study is ready.</p>
+              <span aria-hidden="true">17 — 17</span>
+            </footer>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="js/script.js"></script>
   </body>
 </html>
