@@ -34,7 +34,7 @@ if (menuToggle && navigation) {
   });
 }
 
-const revealItems = [...document.querySelectorAll("#experience [data-reveal], #projects [data-reveal]")];
+const revealItems = [...document.querySelectorAll("[data-reveal]")];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (revealItems.length && !reduceMotion && "IntersectionObserver" in window) {
@@ -46,10 +46,10 @@ if (revealItems.length && !reduceMotion && "IntersectionObserver" in window) {
       entry.target.classList.add("is-visible");
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.14, rootMargin: "0px 0px -5% 0px" });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
   revealItems.forEach((item, index) => {
-    item.style.transitionDelay = `${Math.min(index % 4, 3) * 90}ms`;
+    item.style.transitionDelay = `${Math.min(index % 4, 3) * 80}ms`;
     revealObserver.observe(item);
   });
 }

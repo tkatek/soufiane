@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://soufianeelkhassibi.online/sitemap.xml
