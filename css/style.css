@@ -1422,6 +1422,39 @@ a {
   gap: .85rem;
 }
 
+.project-tile[hidden],
+.projects__show-all[hidden] {
+  display: none;
+}
+
+.projects__show-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  width: fit-content;
+  margin: 1.25rem auto 0;
+  padding: .85rem 1.1rem;
+  border: 1px solid #454545;
+  background: transparent;
+  color: #eee;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: border-color .25s ease, background-color .25s ease;
+}
+
+.projects__show-all:hover {
+  border-color: #888;
+  background: #101010;
+}
+
+.projects__show-all:focus-visible {
+  outline: 2px solid #d8d8d8;
+  outline-offset: 3px;
+}
+
 .project-tile {
   display: flex;
   min-width: 0;

@@ -339,7 +339,7 @@
               <span>SELECT A PROJECT <span aria-hidden="true">↘</span></span>
             </div>
 
-            <div class="projects__grid">
+            <div class="projects__grid" id="project-grid">
               <a class="project-tile project-tile--featured" href="project/index.html?project=powergym" data-reveal>
                 <div class="project-tile__visual project-tile__visual--powergym project-tile__visual--photo" aria-hidden="true">
                   <img class="project-tile__photo" src="project/assets/powergym-analytics.png" alt="" loading="lazy" decoding="async">
@@ -503,6 +503,10 @@
               </a>
 
             </div>
+
+            <button class="projects__show-all" id="show-all-projects" type="button" aria-controls="project-grid" hidden>
+              SHOW ALL PROJECTS <span aria-hidden="true">↘</span>
+            </button>
 
             <footer class="projects__footer" data-reveal>
               <span>MORE DETAILS COMING SOON</span>

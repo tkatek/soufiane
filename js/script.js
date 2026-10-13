@@ -34,6 +34,23 @@ if (menuToggle && navigation) {
   });
 }
 
+const projectGrid = document.querySelector("#project-grid");
+const showAllProjectsButton = document.querySelector("#show-all-projects");
+const projectTiles = projectGrid ? [...projectGrid.querySelectorAll(".project-tile")] : [];
+
+if (showAllProjectsButton && projectTiles.length > 8) {
+  projectTiles.slice(8).forEach((tile) => {
+    tile.hidden = true;
+  });
+  showAllProjectsButton.hidden = false;
+  showAllProjectsButton.addEventListener("click", () => {
+    projectTiles.slice(8).forEach((tile) => {
+      tile.hidden = false;
+    });
+    showAllProjectsButton.hidden = true;
+  });
+}
+
 const revealItems = [...document.querySelectorAll("[data-reveal]")];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealTargetSelectors = {
