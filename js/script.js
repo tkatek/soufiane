@@ -105,7 +105,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 const revealTargetSelectors = {
   "hero__copy": ".hero__availability, :scope > .hero__title, .hero__description, .hero__actions > *",
   "experience__heading": ":scope > *",
-  "experience__story": ".experience__journey > li, .experience__principle, .experience__sketch",
+  "experience__story": ".experience__journey > li, .experience__principle, .experience__workflow",
   "experience__build-card": ".experience__build-label, :scope > h3, .experience__build-steps > li, .experience__build-footer",
   "experience__group": ".experience__group-heading, .experience__timeline > li, .experience__tech-group > h4, .experience__technologies > li",
   "experience__footer": ":scope > *",

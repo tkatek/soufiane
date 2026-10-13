@@ -693,8 +693,8 @@ a {
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(15rem, .85fr) minmax(0, 1.35fr);
-  gap: clamp(2.5rem, 8vw, 8rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5rem);
   padding-top: clamp(2.5rem, 5vw, 4.5rem);
 }
 
@@ -720,7 +720,7 @@ a {
   position: static;
   flex-direction: column;
   align-self: stretch;
-  max-width: 28rem;
+  min-width: 0;
 }
 
 .experience__journey {
@@ -794,123 +794,243 @@ a {
   line-height: 1.7;
 }
 
-.experience__sketch {
-  position: relative;
-  max-width: 28rem;
-  margin: 1.35rem 0 0;
-  padding: .5rem .2rem 0;
+.experience__workflow {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 1.35;
+  flex: 0 0 auto;
+  align-items: stretch;
+  margin: 1rem 0 1.4rem;
+  overflow: hidden;
+  border: 1px solid rgb(115 160 184 / 13%);
+  background:
+    radial-gradient(ellipse at 50% 48%, rgb(46 103 124 / 12%), transparent 70%),
+    linear-gradient(145deg, rgb(11 18 25 / 92%), rgb(5 8 12 / 96%));
 }
 
-.experience__sketch svg {
+.experience__workflow svg {
   display: block;
   width: 100%;
-  height: auto;
-  overflow: visible;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
 }
 
-.experience__sketch-editor,
-.experience__sketch-device,
-.experience__sketch-terminal {
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.6;
+.experience__workflow .experience__workflow-svg--mobile {
+  display: none;
 }
 
-.experience__sketch-editor {
-  fill: rgb(112 174 255 / 3%);
-  stroke: #82b9f5;
-}
-
-.experience__sketch-editor circle {
-  fill: #86c9ff;
-  stroke: none;
-}
-
-.experience__sketch-editor path {
-  fill: none;
-  stroke: #9bd9e8;
-}
-
-.experience__sketch-editor path:last-child {
-  stroke: #c0afff;
-}
-
-.experience__sketch-device {
-  fill: #0b1119;
-  stroke: #a2e3d6;
-}
-
-.experience__sketch-device path {
-  fill: none;
-  stroke: #a2e3d6;
-}
-
-.experience__sketch-device circle {
-  fill: #a2e3d6;
-  stroke: none;
-}
-
-.experience__sketch-terminal {
-  fill: #0b1118;
-  stroke: #768da7;
-}
-
-.experience__sketch-terminal path {
-  fill: none;
-  stroke: #b7d7f5;
-}
-
-.experience__sketch-orbit,
-.experience__sketch-flow,
-.experience__sketch-base {
-  fill: none;
-  stroke: #6882a0;
-  stroke-linecap: round;
+.experience__workflow-window > rect:first-child {
+  stroke: #314653;
   stroke-width: 1.4;
 }
 
-.experience__sketch-orbit {
-  opacity: .6;
+.experience__workflow-window > path:first-of-type {
+  stroke: #314653;
+  stroke-width: 1.2;
 }
 
-.experience__sketch-orbit--inner {
-  stroke: #70b9d0;
-  opacity: .34;
+.experience__workflow-dot--red {
+  fill: #f07878;
 }
 
-.experience__sketch-flow {
-  stroke: #c1b2ff;
-  stroke-dasharray: 4 5;
+.experience__workflow-dot--yellow {
+  fill: #f1c978;
 }
 
-.experience__sketch-arrow {
-  fill: none;
-  stroke: #a6e7d5;
+.experience__workflow-dot--green {
+  fill: #62d69a;
+}
+
+.experience__workflow-title,
+.experience__workflow-caption,
+.experience__workflow-footer,
+.experience__workflow-label text {
+  font-family: var(--mono);
+}
+
+.experience__workflow-title {
+  fill: #c7d4df;
+  font-size: 18px;
+  letter-spacing: .05em;
+}
+
+.experience__workflow-caption {
+  fill: #778b99;
+  font-size: 13px;
+}
+
+.experience__workflow-code,
+.experience__workflow-muted {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
 }
 
-.experience__sketch-spark {
-  fill: #ffe09a;
-  filter: drop-shadow(0 0 5px rgb(255 211 128 / 50%));
+.experience__workflow-code {
+  stroke: #65c9b6;
+  opacity: .83;
 }
 
-.experience__sketch-base {
-  stroke: #6e8eae;
+.experience__workflow-code--bright {
+  stroke: #9ebbd2;
 }
 
-.experience__sketch figcaption {
-  margin: -.1rem 0 0 1.3rem;
-  color: #90a9c4;
+.experience__workflow-code--accent {
+  stroke: #82aaff;
+}
+
+.experience__workflow-muted {
+  fill: none;
+  stroke: #344653;
+}
+
+.experience__workflow-git {
+  stroke: #66d4c2;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.experience__workflow-git circle {
+  fill: #101a21;
+  stroke: #80ddce;
+  stroke-width: 2;
+}
+
+.experience__workflow-card {
+  fill: #0b1218;
+  stroke: #304652;
+  stroke-width: 1;
+}
+
+.experience__workflow-chart {
+  fill: none;
+  stroke: #66d4a3;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.experience__workflow-chart--blue {
+  stroke: #6daeea;
+}
+
+.experience__workflow-chart + circle {
+  fill: #66d4a3;
+}
+
+.experience__workflow-label rect {
+  fill: #0b151b;
+  stroke: #31575b;
+  stroke-width: 1;
+}
+
+.experience__workflow-label text {
+  fill: #9ad8d1;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+
+.experience__workflow-footer {
+  fill: #8da6b7;
+  font-size: 14px;
+  letter-spacing: .16em;
+}
+
+.experience__workflow-footer tspan {
+  fill: #67d5c4;
+}
+
+.experience__workflow-mobile-panel > rect:first-child {
+  stroke: #314653;
+  stroke-width: 1.5;
+}
+
+.experience__workflow-mobile-panel > path:first-of-type {
+  stroke: #314653;
+  stroke-width: 1.2;
+}
+
+.experience__workflow-mobile-panel .experience__workflow-mobile-node {
+  fill: #0d171d;
+  stroke: #76d7c5;
+  stroke-width: 2;
+}
+
+.experience__workflow-mobile-title,
+.experience__workflow-mobile-code,
+.experience__workflow-mobile-caption,
+.experience__workflow-mobile-value,
+.experience__workflow-mobile-footer,
+.experience__workflow-mobile-status-text {
   font-family: var(--mono);
-  font-size: .58rem;
-  letter-spacing: .1em;
 }
 
-.experience__sketch figcaption span {
-  padding-inline: .3rem;
-  color: #a6e7d5;
+.experience__workflow-mobile-title {
+  fill: #d6e2eb;
+  font-size: 14px;
+  letter-spacing: .06em;
+}
+
+.experience__workflow-mobile-code {
+  fill: #a8bdc9;
+  font-size: 12px;
+}
+
+.experience__workflow-mobile-code--accent {
+  fill: #8ccebe;
+}
+
+.experience__workflow-mobile-line {
+  fill: none;
+  stroke: #60859a;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.experience__workflow-mobile-branch,
+.experience__workflow-mobile-connector,
+.experience__workflow-mobile-arrow {
+  fill: none;
+  stroke: #67d5c4;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.experience__workflow-mobile-caption {
+  fill: #8095a2;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.experience__workflow-mobile-value {
+  fill: #e1edf2;
+  font-size: 20px;
+}
+
+.experience__workflow-mobile-chart {
+  fill: none;
+  stroke: #53c798;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.experience__workflow-mobile-status {
+  fill: #103526;
+  stroke: #267c50;
+}
+
+.experience__workflow-mobile-status-text {
+  fill: #76e2a6;
+  font-size: 11px;
+}
+
+.experience__workflow-mobile-footer {
+  fill: #9db2bf;
+  font-size: 12px;
+  letter-spacing: .08em;
 }
 
 .experience__build-card {
@@ -3267,6 +3387,18 @@ html.js-reveal .reveal-item.is-visible {
     max-height: 68svh;
   }
 
+  .experience__workflow {
+    aspect-ratio: 360 / 620;
+  }
+
+  .experience__workflow > svg:first-child {
+    display: none;
+  }
+
+  .experience__workflow .experience__workflow-svg--mobile {
+    display: block;
+  }
+
   .experience__heading,
   .blog__heading {
     grid-template-columns: .75fr 1.25fr;
@@ -3279,8 +3411,8 @@ html.js-reveal .reveal-item.is-visible {
   }
 
   .experience__layout {
-    grid-template-columns: minmax(13rem, .8fr) minmax(0, 1.2fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
   }
 
   .projects__heading {
@@ -3316,6 +3448,23 @@ html.js-reveal .reveal-item.is-visible {
 }
 
 @media (min-width: 641px) and (max-width: 760px) {
+  .experience__layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .experience__workflow {
+    aspect-ratio: 1.35;
+  }
+
+  .experience__workflow > svg:first-child {
+    display: block;
+  }
+
+  .experience__workflow .experience__workflow-svg--mobile {
+    display: none;
+  }
+
   .site-header {
     min-height: 58px;
     padding-inline: 1.4rem;
@@ -3888,6 +4037,11 @@ html.js-reveal .reveal-item.is-visible {
     max-width: none;
   }
 
+  .experience__workflow {
+    aspect-ratio: 360 / 620;
+    margin-block: 1rem 1.25rem;
+  }
+
   .experience__build-card {
     max-width: 34rem;
     margin-top: 3.5rem;
@@ -3913,11 +4067,6 @@ html.js-reveal .reveal-item.is-visible {
 
   .experience__principle {
     margin-top: 1.25rem;
-  }
-
-  .experience__sketch {
-    max-width: 23rem;
-    margin-top: 1rem;
   }
 
   .experience__group {
