@@ -51,6 +51,55 @@ if (showAllProjectsButton && projectTiles.length > 8) {
   });
 }
 
+const contributionGrid = document.querySelector("#github-chart-grid");
+const contributionMonths = document.querySelector("#github-chart-months");
+
+if (contributionGrid && contributionMonths) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const currentWeekStart = new Date(today);
+  currentWeekStart.setDate(today.getDate() - today.getDay());
+
+  const chartStart = new Date(currentWeekStart);
+  chartStart.setDate(currentWeekStart.getDate() - 52 * 7);
+
+  const chartEnd = new Date(currentWeekStart);
+  chartEnd.setDate(chartEnd.getDate() + 6);
+
+  const chartFragment = document.createDocumentFragment();
+  const monthFragment = document.createDocumentFragment();
+  const monthColumns = new Set();
+  const monthKeys = new Set();
+  const dayCount = Math.round((chartEnd - chartStart) / 86_400_000) + 1;
+
+  for (let dayIndex = 0; dayIndex < dayCount; dayIndex += 1) {
+    const date = new Date(chartStart);
+    date.setDate(chartStart.getDate() + dayIndex);
+    const week = Math.floor(dayIndex / 7);
+    const monthKey = `${date.getFullYear()}-${date.getMonth()}`;
+
+    if ((date.getDate() === 1 || dayIndex === 0) && !monthKeys.has(monthKey) && !monthColumns.has(week)) {
+      const month = document.createElement("span");
+      monthKeys.add(monthKey);
+      monthColumns.add(week);
+      month.textContent = date.toLocaleString("en", { month: "short" });
+      month.style.gridColumn = String(week + 1);
+      month.style.gridRow = "1";
+      monthFragment.append(month);
+    }
+
+    const tile = document.createElement("span");
+    const value = Math.abs(Math.sin((dayIndex + 1) * 12.9898) * 43_758.5453) % 1;
+    const level = value < 0.56 ? 0 : value < 0.73 ? 1 : value < 0.86 ? 2 : value < 0.96 ? 3 : 4;
+    tile.dataset.level = String(level);
+    chartFragment.append(tile);
+  }
+
+  contributionGrid.append(chartFragment);
+  contributionMonths.append(monthFragment);
+}
+
 const revealItems = [...document.querySelectorAll("[data-reveal]")];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealTargetSelectors = {
@@ -68,6 +117,7 @@ const revealTargetSelectors = {
   "blog__statement": ":scope > *",
   "blog__topic": ".blog__topic-index, .blog__topic > div > *, .blog__topic-type",
   "blog__note": ":self",
+  "blog__github": ":scope > *",
   "contact__heading": ":scope > *",
   "contact__portrait": "img, figcaption > *",
   "contact__content": ".contact__kicker, :scope > h2, .contact__message, .contact__email > *, .contact__links > a, .contact__availability",
