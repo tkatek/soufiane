@@ -1,266 +1,128 @@
-/* Cursor Studio / Soufiane.
- * One finite, deterministic animation. No iframe, canvas, AI API, random cursors,
- * text-animation plugin or external component. GSAP drives the clock when present;
- * the identical choreography uses requestAnimationFrame when it is unavailable.
- * The 4.8s introduction plays once. Replay is explicit and runs at a readable 12s.
- */
+/* Studio Chapters — two real project stories, followed by an invitation.
+ * Intro: 4.8 seconds per project. Replay/individual chapter: 12 seconds each.
+ * Equal timing; separate 0.75s folder changes. No forced scrolling or AI calls. */
 (function () {
   'use strict';
-  var root = document.querySelector('[data-cursor-studio]');
-  if (!root) return;
-  if (root.cursorStudio && root.cursorStudio.destroy) root.cursorStudio.destroy();
-
-  var $ = function (s) { return root.querySelector(s); };
-  var viewport = $('.hc-viewport'), scene = $('.hc-scene'), artwork = $('.hc-artwork');
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  var duration = 12, clock = { t: duration }, scale = 1;
-  var running = false, visible = true, started = false, destroyed = false;
-  var frame = 0, lastTime = 0, speed = 1, tween = null, resizeObserver = null, visibilityObserver = null;
-  var dialogObserver = null, focusFrozen = false, currentEngine = 'static';
-  var replay = $('[data-hc-replay]'), status = $('[data-hc-status]');
-  var folder = $('.hc-folder'), cover = $('.hc-cover'), sheets = [$('.hc-back-sheet-one'), $('.hc-back-sheet-two')];
-  var tiles = [$('.hc-brief'), $('.hc-interaction'), $('.hc-showcase'), $('.hc-responsive')];
-  var writing = $('.hc-written'), caret = $('.hc-text-caret'), palette = $('.hc-palette');
-  var code = $('.hc-code-tag'), selection = $('.hc-selection'), ready = $('.hc-ready');
-  var guides = $('.hc-guides'), front = $('.hc-preview-card-front'), back = $('.hc-preview-card-back');
-  var stack = $('.hc-stack-badge'), device = $('.hc-device'), check = $('.hc-check-badge');
-  var sliderFill = $('.hc-slider-fill'), sliderKnob = $('.hc-slider-knob'), chart = $('.hc-chart-path');
-  var fullText = 'Make it\nfeel different.', previousText = null, previousStatus = null;
-  var styleCache = new WeakMap(), cleanups = [];
-  var cursors = {};
-  ['build', 'write', 'style', 'layout', 'motion'].forEach(function (name) {
-    cursors[name] = { element: $('[data-hc-cursor="' + name + '"]'), ring: $('[data-hc-cursor="' + name + '"] .hc-click-ring') };
-  });
-
-  function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
-  function progress(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }
-  function ease(p) { return p * p * (3 - 2 * p); }
-  function smooth(t, a, b) { return ease(progress(t, a, b)); }
-  function mix(a, b, p) { return a + (b - a) * p; }
-  function round(n) { return Math.round(n * 1000) / 1000; }
-  function windowOf(t, a, b, c, d) { return smooth(t, a, b) * (1 - smooth(t, c, d)); }
-  function put(el, prop, value) {
-    if (!el) return;
-    var cache = styleCache.get(el);
-    if (!cache) { cache = {}; styleCache.set(el, cache); }
-    value = String(value);
-    if (cache[prop] === value) return;
-    cache[prop] = value; el.style[prop] = value;
+  var root=document.querySelector('[data-cursor-studio]'),C=window.StudioCraft;
+  if(!root||!C)return;
+  if(root.cursorStudio&&root.cursorStudio.destroy)root.cursorStudio.destroy();
+  var original=root.innerHTML,originalClass=root.className;
+  var esc=C.escape,sm=C.smooth,mix=C.mix,r=C.round,pr=C.progress,clamp=C.clamp;
+  var projects=window.PORTFOLIO_PROJECTS||[],data={};projects.forEach(function(p){data[p.id]=p;});
+  var stories=[
+    {id:'powergym',name:'Gym Manager',fullName:'Gym Manager / PowerGym',type:'BUSINESS PLATFORM',brief:'Run your gym.\nIn one place.',benefit:'Members, plans, payments and analytics — one connected workspace.',note:'Mobile layout study; the animated trend is illustrative.',cover:'One workspace.\nA clearer overview.',tech:['Laravel','PHP','MySQL'],features:['Members & plans','Payments & expenses','Coaches & schedules'],color:'#b5a8f5'},
+    {id:'invoiceflow',name:'InvoiceFlow',fullName:'InvoiceFlow',type:'FLUTTER MOBILE APP',brief:'Less admin.\nMore clarity.',benefit:'Invoices, clients, products and expenses — designed around a mobile workflow.',note:'Flutter mobile app · real interface screens.',cover:'Less paperwork.\nMore possibility.',tech:['Flutter'],features:['Invoices & clients','Products & point of sale','Expenses'],color:'#c9a9e9'}
+  ];
+  var arrow='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
+  var folderIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7V5a2 2 0 0 1 2-2h5l3 4h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2-2H5a2 2 0 0 1-2-2V7Z"/></svg>';
+  function skin(cover){return '<svg class="'+(cover?'cs-cover-skin':'cs-folder-skin')+'" viewBox="0 0 656 430" preserveAspectRatio="none"><defs><linearGradient id="cs-skin-'+(cover?'cover':'open')+'" x1="0" y1="0" x2="1" y2="1"><stop stop-color="'+(cover?'#3e3159':'#29263b')+'"/><stop offset="1" stop-color="#15141f"/></linearGradient></defs><path d="M27 1H310Q332 1 332 24V25Q332 48 355 48H629Q655 48 655 75V403Q655 429 629 429H27Q1 429 1 403V27Q1 1 27 1Z" fill="url(#cs-skin-'+(cover?'cover':'open')+')" stroke="#645779"/></svg>';}
+  var cursorNames=['Build','Write','Style','Layout','Polish'],colors=['#bba7f3','#e0c1ea','#d4a4ed','#8bd5e4','#c7c5f0'];
+  root.classList.add('is-chapter-studio');
+  root.innerHTML='<div class="cs-heading"><span><i aria-hidden="true"></i>From a brief to a working product.</span><small>THE MAKING OF</small></div>'+
+    '<div class="cs-chapters" role="group" aria-label="Project stories"><button class="cs-tab" type="button" data-cs-tab="0" aria-pressed="true"><b>01</b> Gym Manager</button><button class="cs-tab" type="button" data-cs-tab="1" aria-pressed="false"><b>02</b> InvoiceFlow</button><button class="cs-tab" type="button" data-cs-tab="2" aria-pressed="false"><b>03</b> More work</button></div>'+
+    '<p class="sr-only">An illustrated build sequence. Cursors open, style and arrange two project folders. This is a choreographed presentation, not a live AI session. Use the chapter buttons to revisit either project.</p>'+
+    '<div class="cs-viewport"><div class="cs-stage"><div class="cs-art" aria-hidden="true"><div class="cs-ambient"></div><div class="cs-sheet"></div><div class="cs-sheet"></div><div class="cs-folder hc-folder"></div><div class="cs-palette"><i></i><i></i><i></i></div><div class="cs-benefit-chips"></div>'+cursorNames.map(function(n,i){return C.cursor(n,colors[i]);}).join('')+'</div>'+
+    '<div class="cs-outro" hidden><small>03 / THE REST OF THE COLLECTION</small><h2>Two stories.<br>More to explore.</h2><p>Web platforms, mobile interfaces and playful experiences. Open the collection.</p><a href="#projects" class="cs-outro-link" data-cs-explore>Explore all projects <span>↗</span></a><div class="cs-mini-folders" aria-hidden="true"><span>&lt;/&gt;</span><span>✳</span><span>↗</span></div></div></div></div>'+
+    '<div class="cs-summary"><div><strong data-cs-name></strong><p data-cs-benefit></p></div><a class="cs-action" href="project/index.html?project=powergym" data-open-project="powergym">View project '+arrow+'</a></div>'+
+    '<div class="cs-footer"><span data-cs-status></span><button type="button" class="cs-control" data-cs-control aria-label="Pause the project story"><span data-cs-control-icon>Ⅱ</span><span data-cs-control-text>Pause story</span></button></div>';
+  var $=function(s){return root.querySelector(s);},$$=function(s){return Array.from(root.querySelectorAll(s));};
+  var viewport=$('.cs-viewport'),stage=$('.cs-stage'),art=$('.cs-art'),folder=$('.cs-folder'),outro=$('.cs-outro'),palette=$('.cs-palette'),chips=$('.cs-benefit-chips'),status=$('[data-cs-status]'),control=$('[data-cs-control]'),action=$('.cs-action'),tabs=$$('[data-cs-tab]'),cursors=$$('.craft-cursor');
+  var selected=-1,mode='all',chapterSeconds=4.8,gap=.75,finished=false,manualPause=false,focusHold=false,hoverHold=false,dead=false;
+  var els={},lastText='',lastStatus='',cache=new WeakMap(),resizeObserver=null;
+  var total=function(){return mode==='all'?chapterSeconds*2+gap*2:chapterSeconds;};
+  function put(el,key,value){if(!el)return;value=String(value);var o=cache.get(el);if(!o){o={};cache.set(el,o);}if(o[key]!==value){o[key]=value;el.style[key]=value;}}
+  function alpha(el,n){put(el,'opacity',r(n));}
+  function visibleWindow(t,a,b,c,d){return sm(t,a,b)*(1-sm(t,c,d));}
+  function message(text){if(lastStatus!==text){status.textContent=text;lastStatus=text;}}
+  function setControl(){var paused=manualPause||focusHold||hoverHold;control.querySelector('[data-cs-control-icon]').textContent=finished?'↻':paused?'▶':'Ⅱ';control.querySelector('[data-cs-control-text]').textContent=finished?'Replay stories':paused?'Resume story':'Pause story';control.setAttribute('aria-label',finished?'Replay both project stories':paused?'Resume the project story':'Pause the project story');control.hidden=C.reduced.matches;}
+  function gymTiles(){
+    var src=data.powergym&&data.powergym.images&&data.powergym.images[0]?data.powergym.images[0].src:'project/assets/powergym-analytics.png';
+    return '<div class="cs-chart cs-tile"><div class="cs-chart-head"><span>See the business clearly.</span><small>ILLUSTRATIVE TREND</small></div><svg viewBox="0 0 250 60" fill="none"><path d="M2 50H248M2 27H248" stroke="#493b691e"/><path class="cs-chart-line cs-chart-secondary" pathLength="1" d="M3 42C35 52 41 21 71 39S108 46 132 35 169 42 191 26 220 32 247 18" stroke="#7a659d" stroke-width="2"/><path class="cs-chart-line" pathLength="1" d="M3 48C27 52 38 20 62 28S91 44 117 21 156 38 180 14 221 21 247 4" stroke="#38224e" stroke-width="3"/></svg><div class="cs-chart-tags"><span>Revenue</span><span>Expenses</span><span>Profit trends</span></div></div>'+
+      '<div class="cs-preview cs-tile"><div class="cs-preview-top"><span>ANALYTICS / OVERVIEW</span><span>REAL PROJECT ↗</span></div><div class="cs-dashboard"><img src="'+esc(src)+'" width="1093" height="768" alt="" decoding="async"></div><div class="cs-stack"><b>La</b> Laravel <span>·</span> PHP <span>·</span> MySQL</div></div>'+
+      '<div class="cs-mobile cs-tile"><span class="cs-eyebrow">MOBILE LAYOUT STUDY</span><strong>Your gym.<br>At a glance.</strong><div class="cs-phone"><div class="cs-phone-ui"><strong>PowerGym <span>↗</span></strong><small>Your daily overview</small><div class="cs-mobile-pills"><span>Members</span><span>Plans</span></div><svg viewBox="0 0 100 35" fill="none"><path d="M1 28 17 24 32 28 45 16 61 20 75 9 99 3" stroke="#7a64ac" stroke-width="2"/></svg><div class="cs-phone-row"><span>Memberships</span><i></i></div><div class="cs-phone-row"><span>Payments</span><i></i></div><div class="cs-phone-row"><span>Schedules</span><i></i></div></div></div><span class="cs-mobile-note">Responsive concept / not a native-app claim</span></div>';
   }
-  function alpha(el, value) { put(el, 'opacity', round(value)); }
-  function color(a, b, p) { return 'rgb(' + a.map(function (n, i) { return Math.round(mix(n, b[i], p)); }).join(',') + ')'; }
-  function point(t, waypoints) {
-    if (t <= waypoints[0][0]) return { x: waypoints[0][1], y: waypoints[0][2] };
-    for (var i = 1; i < waypoints.length; i++) {
-      if (t <= waypoints[i][0]) {
-        var a = waypoints[i - 1], b = waypoints[i], p = smooth(t, a[0], b[0]);
-        return { x: mix(a[1], b[1], p), y: mix(a[2], b[2], p) };
-      }
-    }
-    var last = waypoints[waypoints.length - 1]; return { x: last[1], y: last[2] };
+  function invoiceTiles(){return '<div class="cs-chart cs-tile"><div class="cs-chart-head"><span>A clearer mobile interface.</span><small>UI DESIGN STUDY</small></div><div class="cs-design-controls"><span>Hierarchy</span><span>Spacing</span><span>Contrast</span></div><div class="cs-style-line"><i></i><b></b></div></div>'+
+    '<div class="cs-preview cs-tile cs-invoice-preview"><div class="cs-preview-top"><span>ACTUAL MOBILE SCREENS</span><span>FLUTTER ↗</span></div><div class="cs-invoice-phones"><div class="cs-invoice-phone"><img src="assets/images/studio/invoice-products.webp" width="210" height="382" alt="" decoding="async"></div><div class="cs-invoice-phone"><img src="assets/images/studio/invoice-dashboard.webp" width="206" height="381" alt="" decoding="async"></div><div class="cs-invoice-phone"><img src="assets/images/studio/invoice-invoices.webp" width="211" height="384" alt="" decoding="async"></div></div><span class="cs-annotation">Invoices + clients + products</span></div>'+
+    '<div class="cs-mobile cs-tile cs-invoice-mobile"><span class="cs-eyebrow">CONNECTED WORKFLOWS</span><strong>See every<br>expense.</strong><div class="cs-phone"><img src="assets/images/studio/invoice-expenses.webp" width="221" height="396" alt="" decoding="async"></div></div>';}
+  function mount(index){
+    if(selected===index)return;selected=index;var s=stories[index];art.hidden=false;outro.hidden=true;alpha(art,1);alpha(folder,1);root.dataset.chapter=s.id;
+    folder.innerHTML=skin(false)+'<div class="cs-folder-title">'+folderIcon+'<span>'+esc(s.name)+'</span><small>0'+(index+1)+'</small></div><div class="cs-project-top">'+s.type+'</div>'+
+      '<div class="cs-brief cs-tile"><span class="cs-eyebrow">THE BRIEF</span><p class="cs-typed">'+esc(s.brief)+'</p></div>'+(index===0?gymTiles():invoiceTiles())+
+      '<div class="cs-selection"><i></i><i></i><i></i><i></i><small>resize ↔</small></div><div class="cs-cover">'+skin(true)+'<div class="cs-cover-content"><small>0'+(index+1)+' / SELECTED PROJECT</small><strong>'+esc(s.name)+'</strong><p>'+esc(s.cover).replace('\n','<br>')+'</p><span>'+s.tech.map(esc).join(' · ')+'</span></div></div>';
+    chips.innerHTML=s.features.map(function(f){return '<span>'+esc(f)+'</span>';}).join('');
+    els={cover:$('.cs-cover'),brief:$('.cs-brief'),typed:$('.cs-typed'),chart:$('.cs-chart'),preview:$('.cs-preview'),mobile:$('.cs-mobile'),selection:$('.cs-selection'),dashboard:$('.cs-dashboard'),stack:$('.cs-stack'),phone:$('.cs-mobile .cs-phone'),annotation:$('.cs-annotation'),phones:$$('.cs-invoice-phone'),lines:$$('.cs-chart-line'),slide:$('.cs-style-line i'),knob:$('.cs-style-line b')};
+    lastText='';$('[data-cs-name]').textContent=s.fullName;$('[data-cs-benefit]').textContent=s.benefit;
+    action.href='project/index.html?project='+s.id;action.dataset.openProject=s.id;action.removeAttribute('data-cs-explore');action.innerHTML='View project '+arrow;action.setAttribute('aria-label','View the '+s.fullName+' project');
+    tabs.forEach(function(t,i){t.setAttribute('aria-pressed',String(i===index));t.style.setProperty('--progress',i<index?1:0);});
   }
-  function clickRing(el, t, clicks) {
-    var opacity = 0, size = .4;
-    clicks.forEach(function (time) {
-      var p = (t - time) / .52;
-      if (p >= 0 && p <= 1) { opacity = (1 - p) * .85; size = .4 + p * 1.6; }
-    });
-    alpha(el, opacity); put(el, 'transform', 'scale(' + round(size) + ')');
+  var paths=[
+    [[0,600,32],[.9,91,87],[1.25,91,87],[2.5,41,61],[10,41,61],[11.8,12,33]],
+    [[.45,8,254],[2.1,87,194],[2.4,87,194],[4.35,188,225],[5.6,31,303],[11.5,5,320]],
+    [[1,680,30],[3.75,694,224],[4.1,694,224],[5.4,623,175],[8.8,623,175],[11.5,690,174]],
+    [[1.6,456,532],[4.8,388,438],[5.1,388,438],[7.1,461,469],[9.9,476,482],[11.5,510,520]],
+    [[2.2,690,392],[7.4,324,202],[8.1,390,210],[8.8,455,188],[9.35,540,187],[10,596,370],[11.5,676,410]]
+  ];
+  function scene(t){
+    var s=stories[selected],open=sm(t,.9,2.25),paint=sm(t,4.05,5.5),resize=sm(t,5.1,7.1),polish=sm(t,7.4,9.8),finish=sm(t,10.1,11.7);
+    put(folder,'transform','translateY('+r((1-open)*8)+'px) rotate('+r(-2.5*(1-open))+'deg)');alpha(folder,1);alpha(art,1);
+    put(els.cover,'display',open>.999?'none':'block');put(els.cover,'transform','rotateX('+r(-103*open)+'deg)');alpha(els.cover,1-sm(t,1.4,2.25));
+    [els.brief,els.chart,els.preview,els.mobile].forEach(function(el,i){var p=sm(t,1.65+i*.18,2.75+i*.18);alpha(el,.2+.8*p);put(el,'transform','translateY('+r((1-p)*17)+'px)'+(i===2?' scale('+r(mix(.82,1,resize))+','+r(mix(.85,1,resize))+')':''));});
+    put(els.brief,'filter','saturate('+r(.15+.85*paint)+') brightness('+r(.5+.5*paint)+')');put(els.chart,'backgroundColor',paint>.5?s.color:'#81778e');
+    var text=s.brief.slice(0,Math.floor(s.brief.length*pr(t,2.15,4.35)));if(lastText!==text){els.typed.textContent=text;lastText=text;}
+    alpha(palette,visibleWindow(t,2.7,3.6,6.25,6.85));
+    alpha(els.selection,visibleWindow(t,4.7,5.05,7.25,7.8));put(els.selection,'transform','scale('+r(mix(.82,1,resize))+','+r(mix(.85,1,resize))+')');
+    if(els.dashboard){put(els.dashboard,'transform','translateY('+r(17*(1-polish))+'px) rotate('+r(mix(0,-4,polish))+'deg)');alpha(els.stack,sm(t,8,9));put(els.stack,'transform','translateY('+r(12*(1-sm(t,8,9)))+'px) rotate(2deg)');}
+    els.lines.forEach(function(el,i){put(el,'strokeDasharray','1');put(el,'strokeDashoffset',r(1-sm(t,7.4+i*.15,9.4)));});
+    if(els.slide){put(els.slide,'transform','scaleX('+r(mix(.15,1,polish))+')');put(els.knob,'left',r(75*mix(.15,1,polish))+'%');}
+    els.phones.forEach(function(el,i){var x=(i-1)*18*polish,y=(1-polish)*30+(i===1?0:12),angle=(i-1)*9*polish;put(el,'transform','translate('+r(x)+'px,'+r(y)+'px) rotate('+r(angle)+'deg)');});
+    if(els.annotation){alpha(els.annotation,sm(t,8.3,9.4));put(els.annotation,'transform','translateY('+r(12*(1-sm(t,8.3,9.4)))+'px) rotate(-3deg)');}
+    put(els.phone,'transform','translateY('+r(17*(1-polish))+'px) rotate('+r((selected===0?7:-6)*polish)+'deg)');
+    alpha(chips,finish);put(chips,'transform','translateY('+r(6*(1-finish))+'px)');
+    cursors.forEach(function(el,i){var pos=C.path(t,paths[i]);if(i===3&&t>=5.1&&t<=7.1){pos.x=54+407*mix(.82,1,resize);pos.y=261+208*mix(.85,1,resize);}put(el,'transform','translate('+r(pos.x)+'px,'+r(pos.y)+'px)');el.classList.toggle('cursor-label-left',pos.x>610);el.classList.toggle('cursor-label-above',pos.y>480);alpha(el,C.reduced.matches?0:sm(t,i*.45,i*.45+.45)*(1-sm(t,10.5,11.9)));var ring=el.querySelector('i'),hit=[.9,2.15,4.05,5.1,9.75][i],pulse=pr(t,hit,hit+.5);alpha(ring,t>=hit&&t<=hit+.5?1-pulse:0);put(ring,'transform','scale('+r(.5+pulse*1.5)+')');});
+    var phase=t<1.7?'Opening the folder':t<4.05?'Writing the brief':t<5.1?'Applying the theme':t<7.4?'Arranging the interface':t<10?'Connecting the details':'Ready to explore';
+    root.dataset.chapterPhase=t>=11.99?'finished':phase.toLowerCase().replaceAll(' ','-');
+    message(t>=11.99?s.note:'0'+(selected+1)+' / '+s.name+' · '+phase);tabs[selected].style.setProperty('--progress',r(t/12));
   }
-  var paths = {
-    build: [[0, 490, 53], [.95, 155, 133], [1.25, 155, 133], [2.4, 68, 59], [9.5, 68, 59], [11.4, 74, 74]],
-    write: [[.6, 24, 270], [2.15, 85, 226], [2.5, 85, 226], [4.3, 159, 252], [5.3, 38, 284], [10.7, 20, 288], [11.5, 12, 296]],
-    style: [[1.2, 560, 50], [3.85, 602, 199], [4.5, 602, 199], [6.2, 554, 161], [9.8, 554, 161], [11.4, 579, 166]],
-    layout: [[1.9, 446, 510], [4.7, 296, 431], [5, 296, 431], [6.8, 391, 467], [7.5, 430, 481], [10.1, 430, 481], [11.4, 392, 476]],
-    motion: [[3, 594, 385], [7.15, 339.5, 258], [7.35, 339.5, 258], [8.85, 509.4, 258], [9.6, 547, 390], [10.2, 547, 390], [11.6, 587, 426]]
+  function showMore(){
+    art.hidden=true;outro.hidden=false;put(outro,'transform','translateY(0px) rotate(0deg)');alpha(outro,1);root.dataset.chapter='more';root.dataset.chapterPhase='finished';
+    tabs.forEach(function(t,i){t.setAttribute('aria-pressed',String(i===2));t.style.setProperty('--progress',1);});
+    $('[data-cs-name]').textContent='The rest of the collection';$('[data-cs-benefit]').textContent='Explore all '+projects.length+' projects — platforms, mobile work and interactive experiences.';
+    action.href='#projects';delete action.dataset.openProject;action.setAttribute('data-cs-explore','');action.setAttribute('aria-label','Explore all projects');action.innerHTML='Explore all projects '+arrow;
+    message('Choose a folder above to revisit a project.');
+  }
+  function render(time){
+    if(dead)return;
+    root.dataset.storyTime=r(time);
+    if(mode==='single'){mount(singleIndex);scene(Math.min(12,time/chapterSeconds*12));return;}
+    var a=chapterSeconds,b=a+gap,c=b+chapterSeconds,end=c+gap;
+    if(time<a){mount(0);scene(time/a*12);}
+    else if(time<b){var p=pr(time,a,b);if(p<.5){mount(0);scene(12);put(els.cover,'display','block');alpha(els.cover,p*2);put(els.cover,'transform','rotateX('+r(-100*(1-p*2))+'deg)');put(folder,'transform','translateX('+r(-36*p*2)+'px) rotate('+r(-2*p*2)+'deg)');}else{mount(1);scene(0);put(folder,'transform','translateX('+r(46*(1-(p-.5)*2))+'px) rotate('+r(2*(1-(p-.5)*2))+'deg)');}}
+    else if(time<c){mount(1);scene((time-b)/chapterSeconds*12);}
+    else{showMore();var v=sm(time,c,end);put(outro,'transform','translateY('+r(30*(1-v))+'px) rotate('+r(-2*(1-v))+'deg)');alpha(outro,v);}
+  }
+  var singleIndex=0,clock=C.clock({element:root,duration:total(),render:render,complete:function(){finished=true;manualPause=false;if(mode==='all')showMore();else{mount(singleIndex);scene(12);}root.dataset.storyPlaying='false';setControl();}});
+  function start(all,index,intro){mode=all?'all':'single';singleIndex=index||0;chapterSeconds=intro?4.8:12;finished=false;manualPause=false;root.dataset.storyPlaying='true';root.dataset.chapterSeconds=chapterSeconds;clock.play(total());setControl();}
+  function hold(){if(finished)return;if(manualPause||focusHold||hoverHold)clock.pause();else clock.resume();setControl();}
+  function choose(index){if(index===2){clock.seek(total());showMore();finished=true;root.dataset.storyPlaying='false';setControl();return;}selected=-1;start(false,index,false);}
+  function onClick(e){var tab=e.target.closest('[data-cs-tab]');if(tab){choose(Number(tab.dataset.csTab));return;}if(e.target.closest('[data-cs-control]')){if(finished){selected=-1;start(true,0,false);}else{manualPause=!(manualPause||focusHold||hoverHold);focusHold=false;hoverHold=false;hold();}return;}var explore=e.target.closest('[data-cs-explore]');if(explore){var allFilter=document.querySelector('[data-filter="all"]'),all=document.querySelector('#show-all-projects');if(allFilter&&!allFilter.classList.contains('is-active'))allFilter.click();if(all&&!all.hidden)all.click();clock.pause();}}
+  root.addEventListener('click',onClick);
+  function onFocus(e){if(e.target===action){focusHold=true;hold();}}
+  function onBlur(e){if(e.target===action){focusHold=false;hold();}}
+  root.addEventListener('focusin',onFocus);root.addEventListener('focusout',onBlur);
+  function enter(){hoverHold=true;hold();}function leave(){hoverHold=false;hold();}
+  action.addEventListener('pointerenter',enter);action.addEventListener('pointerleave',leave);
+  function resize(){var scale=viewport.clientWidth/720;if(scale>0)stage.style.setProperty('--cs-scale',String(scale));}
+  if('ResizeObserver'in window){resizeObserver=new ResizeObserver(resize);resizeObserver.observe(viewport);}else window.addEventListener('resize',resize);
+  function preference(){if(C.reduced.matches){clock.finish();if(mode==='all'){selected=-1;mount(0);scene(12);}finished=true;setControl();}}
+  C.reduced.addEventListener('change',preference);
+  root.cursorStudio={
+    getState:function(){return Object.assign({chapter:root.dataset.chapter,chapterPhase:root.dataset.chapterPhase,mode:mode,secondsPerChapter:chapterSeconds,finished:finished},clock.getState());},
+    selectChapter:function(i){choose(i);},
+    seekChapter:function(i,t){mode='single';singleIndex=i;chapterSeconds=12;selected=-1;clock.play(12);clock.seek(clamp(t,0,12));finished=t>=12;setControl();},
+    replay:function(){selected=-1;start(true,0,false);},
+    finish:function(){clock.finish();},
+    destroy:function(){dead=true;clock.destroy();if(resizeObserver)resizeObserver.disconnect();else window.removeEventListener('resize',resize);C.reduced.removeEventListener('change',preference);root.removeEventListener('click',onClick);root.removeEventListener('focusin',onFocus);root.removeEventListener('focusout',onBlur);action.removeEventListener('pointerenter',enter);action.removeEventListener('pointerleave',leave);root.innerHTML=original;root.className=originalClass;}
   };
-  var clicks = { build: [.95], write: [2.15], style: [4.15], layout: [5], motion: [7.3, 9.65] };
-  var enters = { build: 0, write: .6, style: 1.2, layout: 1.9, motion: 3 };
-  var restingAlpha = { build: .8, write: 0, style: .75, layout: .82, motion: 0 };
-  var chartLength = 130;
-  try { chartLength = chart.getTotalLength(); } catch (_) {}
-  put(chart, 'strokeDasharray', chartLength);
-
-  function render(t) {
-    if (destroyed) return;
-    t = clamp(t, 0, duration); clock.t = t;
-    var open = smooth(t, .95, 2.35), paint = smooth(t, 4.15, 5.5);
-    var resizing = smooth(t, 5, 6.8), polish = smooth(t, 7.35, 9.55);
-    var settle = smooth(t, 9.8, 11.35), isFinal = t >= duration - .001;
-    var lift = Math.sin(progress(t, 9.6, 11.4) * Math.PI) * 6;
-    put(folder, 'transform', 'translateY(' + round(7 * (1 - open) - lift) + 'px) rotate(' + round(-2.5 * (1 - open)) + 'deg)');
-    alpha(folder, .65 + .35 * open);
-    put(cover, 'display', open >= .999 ? 'none' : 'block');
-    put(cover, 'transform', 'translateY(' + round(open * 42) + 'px) rotateX(' + round(-106 * open) + 'deg)');
-    alpha(cover, 1 - smooth(t, 1.45, 2.25));
-    sheets.forEach(function (sheet, i) { put(sheet, 'transform', 'translateY(' + round(open * (i ? -9 : -14)) + 'px) rotate(' + (i ? 3 : -4) + 'deg)'); });
-    alpha(guides, windowOf(t, 1.3, 2.3, 8.8, 10) * .16);
-    tiles.forEach(function (tile, i) {
-      var enter = smooth(t, 1.65 + i * .24, 2.8 + i * .24);
-      alpha(tile, .25 + enter * .75);
-      var sx = i === 2 ? mix(.72, 1, resizing) : 1;
-      var sy = i === 2 ? mix(.78, 1, resizing) : 1;
-      put(tile, 'transform', 'translateY(' + round((1 - enter) * 20) + 'px) scale(' + round(sx) + ',' + round(sy) + ')');
-    });
-    put(tiles[0], 'backgroundColor', color([49, 51, 66], [233, 232, 244], paint));
-    put(tiles[1], 'backgroundColor', color([54, 55, 72], [166, 167, 255], paint));
-    put(tiles[2], 'backgroundColor', color([31, 33, 46], [51, 49, 78], paint));
-    put(tiles[3], 'backgroundColor', color([46, 50, 65], [222, 231, 238], paint));
-    put(writing, 'color', color([225, 222, 242], [37, 34, 59], paint));
-    put($('.hc-brief .hc-tile-eyebrow'), 'color', color([161, 163, 185], [86, 86, 110], paint));
-    put($('.hc-interaction p'), 'color', color([231, 228, 250], [25, 27, 53], paint));
-    put($('.hc-interaction .hc-tile-eyebrow'), 'color', color([167, 165, 191], [57, 59, 104], paint));
-    put($('.hc-responsive p'), 'color', color([231, 228, 250], [37, 48, 69], paint));
-    put($('.hc-responsive .hc-tile-eyebrow'), 'color', color([167, 165, 191], [89, 103, 121], paint));
-    var typed = fullText.slice(0, Math.floor(fullText.length * progress(t, 2.2, 4.35)));
-    if (typed !== previousText) { writing.textContent = typed; previousText = typed; }
-    put(caret, 'display', t > 2.2 && t < 4.5 ? 'block' : 'none');
-    alpha(caret, Math.sin(t * 16) > -.2 ? 1 : .1);
-    alpha(palette, windowOf(t, 2.8, 3.7, 6.4, 7.1));
-    put(palette, 'transform', 'translateX(' + round((1 - smooth(t, 2.8, 3.7)) * 15) + 'px)');
-    alpha(code, windowOf(t, 4.2, 4.8, 6.6, 7.4));
-    put(code, 'transform', 'translateY(' + round((1 - smooth(t, 4.2, 4.8)) * 10) + 'px) rotate(4deg)');
-    alpha(selection, windowOf(t, 4.4, 4.8, 6.9, 7.4));
-    put(selection, 'transform', 'scale(' + round(mix(.72, 1, resizing)) + ',' + round(mix(.78, 1, resizing)) + ')');
-    var slide = mix(.25, .82, smooth(t, 7.35, 8.85));
-    put(sliderFill, 'width', round(slide * 100) + '%'); put(sliderKnob, 'left', round(slide * 100) + '%');
-    alpha(front, smooth(t, 2.8, 3.6)); alpha(back, smooth(t, 3, 3.9));
-    put(front, 'transform', 'translateY(' + round(26 * (1 - polish)) + 'px) rotate(' + round(mix(-2, -7, polish)) + 'deg)');
-    put(back, 'transform', 'translate(' + round(-20 * (1 - polish)) + 'px,' + round(18 * (1 - polish)) + 'px) rotate(' + round(mix(0, 9, polish)) + 'deg)');
-    alpha(stack, smooth(t, 7.8, 8.8)); put(stack, 'transform', 'translateY(' + round(12 * (1 - smooth(t, 7.8, 8.8))) + 'px) rotate(3deg)');
-    alpha(device, smooth(t, 3.3, 4.1));
-    put(device, 'transform', 'translateY(' + round(23 * (1 - polish)) + 'px) rotate(' + round(mix(0, -9, polish)) + 'deg)');
-    put(chart, 'strokeDashoffset', round(chartLength * (1 - smooth(t, 8, 9.5))));
-    alpha(check, smooth(t, 9.6, 10.2));
-    put(check, 'transform', 'scale(' + round(.7 + .3 * smooth(t, 9.6, 10.2)) + ')');
-    alpha(ready, settle); put(ready, 'transform', 'translateY(' + round(8 * (1 - settle)) + 'px)');
-    Object.keys(cursors).forEach(function (name) {
-      var cursor = cursors[name], position = point(t, paths[name]);
-      // Keep the layout and motion pointers attached to the handles they drag.
-      if (name === 'layout' && t >= 5 && t <= 6.8) {
-        position.x = 51 + 340 * mix(.72, 1, resizing); position.y = 303 + 164 * mix(.78, 1, resizing);
-      }
-      if (name === 'motion' && t >= 7.35 && t <= 8.85) { position.x = 265 + 298 * slide; position.y = 258; }
-      put(cursor.element, 'transform', 'translate(' + round(position.x) + 'px,' + round(position.y) + 'px)');
-      var opacity = smooth(t, enters[name], enters[name] + .5) * mix(1, restingAlpha[name], smooth(t, 10.2, 11.7));
-      alpha(cursor.element, reduced.matches ? 0 : opacity); clickRing(cursor.ring, t, clicks[name]);
-    });
-    var message = t < 1.8 ? '01 / Open a little possibility.' : t < 4.15 ? '02 / Give the idea a voice.' : t < 5.6 ? '03 / Find the right feeling.' : t < 7.35 ? '04 / Make space for the details.' : t < 10 ? '05 / A little motion. A lot of life.' : 'Good ideas deserve good execution.';
-    if (message !== previousStatus) { status.textContent = message; previousStatus = message; }
-    root.dataset.hcPhase = isFinal ? 'finished' : t < 1.8 ? 'open' : t < 4.15 ? 'write' : t < 5.6 ? 'style' : t < 7.35 ? 'layout' : t < 10 ? 'motion' : 'finish';
-  }
-
-  function sizeScene() {
-    if (destroyed) return;
-    scale = viewport.clientWidth / 640;
-    if (!(scale > 0)) return;
-    scene.style.setProperty('--hc-scale', String(scale));
-  }
-  function isBlocked() {
-    return !visible || document.hidden || focusFrozen || !!document.querySelector('#project-dialog[open]');
-  }
-  function stopClock() {
-    cancelAnimationFrame(frame); frame = 0; lastTime = 0;
-    if (tween) { tween.kill(); tween = null; }
-  }
-  function complete() {
-    stopClock(); running = false; render(duration);
-    replay.disabled = false; replay.querySelector('span').textContent = 'Replay build';
-    root.dataset.hcRunning = 'false';
-  }
-  function nativeTick(now) {
-    if (!running || destroyed) return;
-    var delta = lastTime ? Math.min((now - lastTime) / 1000, .08) : 0; lastTime = now;
-    if (!isBlocked()) render(clock.t + delta * speed);
-    if (clock.t >= duration) { complete(); return; }
-    frame = requestAnimationFrame(nativeTick);
-  }
-  function syncPlayback() {
-    if (!running || destroyed) return;
-    if (tween) { if (isBlocked()) tween.pause(); else tween.resume(); }
-    else {
-      // Avoid keeping a requestAnimationFrame loop alive in a hidden/offscreen scene.
-      if (isBlocked()) { cancelAnimationFrame(frame); frame = 0; lastTime = 0; }
-      else if (!frame) { lastTime = 0; frame = requestAnimationFrame(nativeTick); }
-    }
-  }
-  function play(explicit) {
-    if (destroyed || reduced.matches) { complete(); return; }
-    stopClock(); artwork.style.transform = ''; focusFrozen = false;
-    speed = explicit ? 1 : duration / 4.8;
-    started = true; running = true; render(0);
-    root.dataset.hcRunning = 'true';
-    replay.disabled = false; replay.querySelector('span').textContent = 'Finish preview';
-    if (window.gsap && typeof window.gsap.to === 'function') {
-      currentEngine = 'gsap';
-      tween = window.gsap.to(clock, { t: duration, duration: duration / speed, ease: 'none', paused: isBlocked(),
-        onUpdate: function () { render(clock.t); }, onComplete: complete });
-    } else { currentEngine = 'native'; syncPlayback(); }
-    root.dataset.hcEngine = currentEngine;
-  }
-  function onReplay() { if (running) complete(); else play(true); }
-  function onReduced() {
-    if (reduced.matches) { started = true; complete(); replay.hidden = true; artwork.style.transform = ''; }
-    else { replay.hidden = false; render(duration); }
-  }
-  function onVisibility() { syncPlayback(); }
-  function onMotionReady() {
-    // Upgrade an in-flight native clock without restarting the scene or duplicating loops.
-    if (!running || tween || reduced.matches || !window.gsap || typeof window.gsap.to !== 'function') return;
-    cancelAnimationFrame(frame); frame = 0; lastTime = 0;
-    currentEngine = 'gsap'; root.dataset.hcEngine = currentEngine;
-    tween = window.gsap.to(clock, { t: duration, duration: Math.max(.01, (duration - clock.t) / speed), ease: 'none', paused: isBlocked(),
-      onUpdate: function () { render(clock.t); }, onComplete: complete });
-  }
-  function onPointer(event) {
-    if (running || reduced.matches || !finePointer.matches || event.pointerType === 'touch') return;
-    var rect = viewport.getBoundingClientRect();
-    var x = clamp((event.clientX - rect.left) / rect.width - .5, -.5, .5);
-    var y = clamp((event.clientY - rect.top) / rect.height - .5, -.5, .5);
-    artwork.style.transform = 'rotateY(' + round(x * 3.5) + 'deg) rotateX(' + round(-y * 2.5) + 'deg)';
-  }
-  function resetPointer() { artwork.style.transform = ''; }
-  function listen(target, name, fn, options) { target.addEventListener(name, fn, options); cleanups.push(function () { target.removeEventListener(name, fn, options); }); }
-  function focusIn(event) {
-    if (event.target.closest('.hc-project-link,.hc-mobile-project') && running) { complete(); }
-  }
-  function onKey(event) { if (event.key === 'Escape' && running && root.contains(document.activeElement)) complete(); }
-  function destroy() {
-    if (destroyed) return;
-    stopClock(); running = false; render(duration); destroyed = true;
-    cleanups.forEach(function (fn) { fn(); });
-    if (resizeObserver) resizeObserver.disconnect();
-    if (visibilityObserver) visibilityObserver.disconnect();
-    if (dialogObserver) dialogObserver.disconnect();
-    if (reduced.removeEventListener) reduced.removeEventListener('change', onReduced); else reduced.removeListener(onReduced);
-    delete root.cursorStudio;
-  }
-  root.cursorStudio = {
-    replay: function () { play(true); }, finish: complete, destroy: destroy,
-    // Deterministic inspection hook: useful for screenshots and future regression tests.
-    seek: function (seconds) { stopClock(); running = false; render(clamp(Number(seconds) || 0, 0, duration)); root.dataset.hcRunning = 'false'; replay.querySelector('span').textContent = 'Replay build'; },
-    state: function () { return { time: clock.t, duration: duration, playing: running, engine: currentEngine, scale: scale, reduced: reduced.matches }; }
-  };
-  root.dataset.hcEnhanced = 'true'; replay.hidden = reduced.matches;
-  artwork.style.transition = 'transform 450ms cubic-bezier(.2,.7,.2,1)';
-  sizeScene(); render(duration);
-  if ('ResizeObserver' in window) { resizeObserver = new ResizeObserver(sizeScene); resizeObserver.observe(viewport); }
-  else listen(window, 'resize', sizeScene, { passive: true });
-  listen(replay, 'click', onReplay); listen(document, 'visibilitychange', onVisibility);
-  listen(window, 'portfolio:motionready', onMotionReady);
-  listen(root, 'focusin', focusIn); listen(root, 'keydown', onKey);
-  listen(viewport, 'pointermove', onPointer, { passive: true }); listen(viewport, 'pointerleave', resetPointer);
-  if (reduced.addEventListener) reduced.addEventListener('change', onReduced); else reduced.addListener(onReduced);
-  var dialog = document.getElementById('project-dialog');
-  if (dialog && 'MutationObserver' in window) { dialogObserver = new MutationObserver(syncPlayback); dialogObserver.observe(dialog, { attributes: true, attributeFilter: ['open'] }); }
-  if ('IntersectionObserver' in window) {
-    visibilityObserver = new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
-      if (visible && !started && !reduced.matches) play(false); else syncPlayback();
-    }, { threshold: .12 }); visibilityObserver.observe(root);
-  } else if (!reduced.matches) play(false);
-  // BFCache restores the same instance; lifecycle remains idempotent.
-  listen(window, 'pagehide', function () { if (running) { cancelAnimationFrame(frame); frame = 0; lastTime = 0; if (tween) tween.pause(); } });
-  listen(window, 'pageshow', syncPlayback);
+  resize();mount(0);
+  if(C.reduced.matches){mode='single';singleIndex=0;scene(12);finished=true;setControl();}else start(true,0,true);
 })();
