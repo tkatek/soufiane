@@ -91,7 +91,10 @@
   async function openProject(id,source,push){
     var project=projects.find(function(p){return p.id===id;});if(!project||!dialog||state!=='idle')return;
     state='opening';currentProject=project;opener=source||document.activeElement;controller=new AbortController();var signal=controller.signal;
-    var rect=source?($('.project-visual',source.closest('.project-card'))||source).getBoundingClientRect():null;
+    var sourceCard=source&&source.closest('.project-card');
+    var sourceStudio=source&&source.closest('[data-cursor-studio]');
+    var sourceVisual=sourceCard?$('.project-visual',sourceCard):(sourceStudio?$('.hc-folder',sourceStudio):source);
+    var rect=sourceVisual?sourceVisual.getBoundingClientRect():null;
     baseHash=location.hash.indexOf('#project/')===0?'#projects':(location.hash||'#projects');ownsHistory=push!==false;
     if(ownsHistory)history.pushState(Object.assign({},history.state,{portfolioProject:id}),'','#project/'+encodeURIComponent(id));
     closeMenu();content.innerHTML=V.render(project,{modal:true});content.style.opacity='0';scroller.scrollTop=0;$('#dialog-project-index').textContent=project.number+' / 17 — '+project.name;
