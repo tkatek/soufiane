@@ -1,91 +1,61 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#050505">
-    <meta name="description" content="Project case study from Soufiane's full-stack developer portfolio.">
-    <title>Project Case Study | Soufiane</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="#06080d" name="theme-color"/>
+    <meta content="Project details and selected work from Soufiane El Khassibi’s full-stack developer portfolio." name="description"/>
+    <title>Project Details | Soufiane El Khassibi</title>
+    <link href="../css/style.css?v=cinematic-1" rel="stylesheet"/>
   </head>
   <body class="project-page">
-    <main class="project-page__main">
-      <a class="project-page__back" href="../index.html#projects">
-        <span aria-hidden="true">←</span> BACK TO PROJECTS
-      </a>
-      <section class="project-page__card" aria-labelledby="project-title">
-        <p class="project-page__eyebrow"><span>PROJECT CASE STUDY</span><span id="project-number">— / 17</span></p>
-        <h1 class="project-page__title" id="project-title">Loading project…</h1>
-        <p class="project-page__message" id="project-message" role="status"></p>
-        <a class="project-page__link" href="../index.html#projects">Explore all projects <span aria-hidden="true">↗</span></a>
-      </section>
-      <section class="project-page__case-study" id="invoiceflow-case-study" aria-label="InvoiceFlow project details" hidden>
-        <figure class="project-page__image">
-          <img src="assets/invoiceflow.png" alt="InvoiceFlow mobile app screens for dashboard, products, point of sale, expenses, clients, and invoices">
-          <figcaption>InvoiceFlow — mobile app interface explorations</figcaption>
-        </figure>
-        <div class="project-page__details">
-          <article>
-            <p class="project-page__section-label">OVERVIEW</p>
-            <h2>Invoicing, made simpler.</h2>
-            <p>InvoiceFlow is a mobile invoice management application designed to simplify creating, organizing, and managing invoices for businesses and independent professionals.</p>
-            <p>Built with Flutter, the app focuses on a clean, intuitive experience and a structured workflow for essential business operations. It helps users manage invoices digitally and stay organized with less reliance on manual processes.</p>
-            <p>Through this project, I explored mobile application development, UI/UX design principles, and the process of turning a business idea into a complete digital product.</p>
-          </article>
-          <aside class="project-page__facts" aria-label="Project details">
-            <p class="project-page__section-label">PROJECT FOCUS</p>
-            <ul>
-              <li>Mobile application</li>
-              <li>Flutter</li>
-              <li>Invoice management</li>
-              <li>Business workflow</li>
-              <li>UI/UX design</li>
-            </ul>
-          </aside>
-        </div>
-      </section>
-      <section class="project-page__case-study" id="powergym-case-study" aria-label="PowerGym project details" hidden>
-        <div class="project-page__gallery">
-          <figure class="project-page__image project-page__image--wide">
-            <img src="assets/powergym-analytics.png" alt="PowerGym analytics dashboard with revenue, expenses, profit trends, subscription plans, and renewal alerts" width="1093" height="768">
-            <figcaption>Analytics dashboard — revenue, expenses, plans, and renewal alerts</figcaption>
-          </figure>
-          <figure class="project-page__image">
-            <img src="assets/powergym-plans.png" alt="PowerGym plans management screen showing subscription plan pricing and durations" width="1101" height="768">
-            <figcaption>Plans management — subscription pricing and access durations</figcaption>
-          </figure>
-          <figure class="project-page__image">
-            <img src="assets/powergym-shop.png" alt="PowerGym shop screen with product inventory, order summary, and sales controls" width="1461" height="768">
-            <figcaption>Gym shop — product inventory and order management</figcaption>
-          </figure>
-        </div>
-        <div class="project-page__details">
-          <article>
-            <p class="project-page__section-label">OVERVIEW</p>
-            <h2>Run every part of your gym in one place.</h2>
-            <p>PowerGym is a complete gym management platform designed to help fitness businesses organize and manage their daily operations through a centralized digital system.</p>
-            <p>The platform replaces manual processes with tools for managing members, subscriptions, payments, coaches, schedules, expenses, and business analytics. Dashboards, structured data management, financial tracking, and automated workflows help gym owners run operations more efficiently.</p>
-            <p>Through PowerGym, I explored building a real-world SaaS-style application, focusing on scalability, clean architecture, and creating a product that solves practical business challenges.</p>
-          </article>
-          <aside class="project-page__facts" aria-label="Project details">
-            <p class="project-page__section-label">PLATFORM FEATURES</p>
-            <ul>
-              <li>Member and subscription management</li>
-              <li>Payments and financial tracking</li>
-              <li>Coaches and schedules</li>
-              <li>Expenses and analytics</li>
-              <li>Dashboards and workflows</li>
-              <li>Scalable SaaS-style architecture</li>
-            </ul>
-            <a class="project-page__live-link" href="https://tkatek.github.io/gym-manager/" target="_blank" rel="noopener noreferrer">Open PowerGym <span aria-hidden="true">↗</span></a>
-          </aside>
-        </div>
-      </section>
-      <footer class="project-page__footer">
-        <a href="../index.html">SOUFIANE<span>.</span></a>
-        <span>FULL STACK DEVELOPER / MOROCCO</span>
-      </footer>
+    <a class="skip-link" href="#case-study-main">Skip to project</a>
+    <div aria-hidden="true" class="page-rails"></div>
+    <canvas aria-hidden="true" id="ambient-canvas"></canvas>
+    <header class="project-page-header container">
+      <a class="wordmark" href="../index.html">SOUFIANE<span class="brand-dot">.</span></a>
+      <a class="back-link" href="../index.html#projects">← BACK TO PROJECTS</a>
+    </header>
+    <main aria-live="polite" class="case-study-main" id="case-study-main">
+      <div class="container project-loading">
+        <p class="eyebrow">PROJECT FILE</p>
+        <h1>Project details</h1>
+        <p>Choose a project from the portfolio to explore its details.</p>
+        <a class="button button--outline" href="../index.html#projects">Explore all projects ↗</a>
+      </div>
     </main>
-    <script src="project.js"></script>
+    <noscript>
+      <section class="container noscript-projects">
+        <h2>Project summaries</h2>
+        <details><summary>PowerGym</summary><p>A centralized gym management platform for members, subscriptions, payments, coaches, operations, and business analytics.</p><p>PowerGym is a complete gym management platform designed to help fitness businesses organize and manage their daily operations through a centralized digital system.</p><p>The platform replaces manual processes with tools for managing members, subscriptions, payments, coaches, schedules, expenses, and business analytics. Dashboards, structured data management, financial tracking, and automated workflows help gym owners run operations more efficiently.</p><p>Through PowerGym, I explored building a real-world SaaS-style application, focusing on scalability, clean architecture, and creating a product that solves practical business challenges.</p><a href="https://tkatek.github.io/gym-manager/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Marrakesh Beauty</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>InvoiceFlow</summary><p>A Flutter mobile app for helping businesses and independent professionals manage invoices with a clearer digital workflow.</p><p>InvoiceFlow is a mobile invoice management application designed to simplify creating, organizing, and managing invoices for businesses and independent professionals.</p><p>Built with Flutter, the app focuses on a clean, intuitive experience and a structured workflow for essential business operations. It helps users manage invoices digitally and stay organized with less reliance on manual processes.</p><p>Through this project, I explored mobile application development, UI/UX design principles, and the process of turning a business idea into a complete digital product.</p></details>
+        <details><summary>Riadsoq</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>Remtoo</summary><p>Explore the live website and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://tkatek.github.io/remtoolanding-page/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Boston English Center</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>Blossom / Word Bloom</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>English Grammar Game</summary><p>Explore the live game and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://tkatek.github.io/english-grammar-game/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Cursor</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>Tourism Amanar</summary><p>Explore the live website and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://amanartourism.com" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Django Projects</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>Laravel SaaS Experiments</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>n8n Automation Experiments</summary><p>Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet.</p></details>
+        <details><summary>Definite Dash</summary><p>Explore the live game and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://tkatek.github.io/Definite-Dash-game/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Perfume Store</summary><p>Explore the live website and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://tkatek.github.io/parfume/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Cap Store</summary><p>Explore the live website and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://tkatek.github.io/cap-store1/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+        <details><summary>Jewelry Store</summary><p>Explore the live website and the available project previews. A detailed technical case study has not been published yet.</p><a href="https://tkatek.github.io/Jewelry/" rel="noopener noreferrer" target="_blank">Open live project ↗</a></details>
+      </section>
+    </noscript>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="wordmark" href="../index.html">SOUFIANE<span class="brand-dot">.</span></a>
+        <span>FULL-STACK DEVELOPER / MOROCCO</span>
+        <a href="../index.html#projects">ALL PROJECTS ↗</a>
+      </div>
+    </footer>
+    <button aria-label="Pause decorative animations" aria-pressed="true" class="motion-toggle" hidden="" id="motion-toggle" type="button"><span aria-hidden="true" class="motion-icon">Ⅱ</span><span class="motion-label">Motion on</span></button>
+    <script defer="" src="../js/projects-data.js?v=cinematic-1"></script>
+    <script defer="" src="../js/script.js?v=cinematic-1"></script>
+    <script defer="" src="project.js?v=cinematic-1"></script>
   </body>
 </html>

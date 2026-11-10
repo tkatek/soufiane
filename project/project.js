@@ -1,45 +1,23 @@
-const projectDetails = new Map([
-  ["powergym", { name: "PowerGym", number: "01" }],
-  ["marrakesh-beauty", { name: "Marrakesh Beauty", number: "02" }],
-  ["invoiceflow", { name: "InvoiceFlow", number: "03" }],
-  ["riadsoq", { name: "Riadsoq", number: "04" }],
-  ["remtoo", { name: "Remtoo", number: "05" }],
-  ["boston-english-center", { name: "Boston English Center", number: "06" }],
-  ["blossom-word-bloom", { name: "Blossom / Word Bloom", number: "07" }],
-  ["english-grammar-game", { name: "English Grammar Game", number: "08" }],
-  ["cursor-agency-concept", { name: "Cursor", number: "09" }],
-  ["tourism-amanar", { name: "Tourism Amanar", number: "10" }],
-  ["django-projects", { name: "Django Projects", number: "11" }],
-  ["laravel-saas-experiments", { name: "Laravel SaaS Experiments", number: "12" }],
-  ["n8n-automation-experiments", { name: "n8n Automation Experiments", number: "13" }],
-  ["definite-dash-game", { name: "Definite Dash", number: "14" }],
-  ["perfume-store", { name: "Perfume Store", number: "15" }],
-  ["cap-store", { name: "Cap Store", number: "16" }],
-  ["jewelry-store", { name: "Jewelry Store", number: "17" }],
-]);
-
-const project = projectDetails.get(new URLSearchParams(window.location.search).get("project"));
-const title = document.querySelector("#project-title");
-const message = document.querySelector("#project-message");
-const number = document.querySelector("#project-number");
-const invoiceFlowCaseStudy = document.querySelector("#invoiceflow-case-study");
-const powerGymCaseStudy = document.querySelector("#powergym-case-study");
-
-if (project && title && message && number) {
-  title.textContent = project.name;
-  number.textContent = `${project.number} / 17`;
-  message.textContent = "The full project story, screenshots, and details will be added here soon.";
-  if (new URLSearchParams(window.location.search).get("project") === "invoiceflow" && invoiceFlowCaseStudy) {
-    message.textContent = "A Flutter mobile app for helping businesses and independent professionals manage invoices with a clearer digital workflow.";
-    invoiceFlowCaseStudy.hidden = false;
+/* Dedicated, shareable project pages. Uses the same data as the animated viewer. */
+(() => {
+  'use strict';
+  const container = document.querySelector('#case-study-main');
+  const data = Array.isArray(window.PORTFOLIO_PROJECTS) ? window.PORTFOLIO_PROJECTS : [];
+  const id = new URLSearchParams(window.location.search).get('project');
+  const project = data.find(item => item.id === id);
+  if (!container || !window.PortfolioUI) return;
+  if (!project) {
+    document.title = 'Project Not Found | Soufiane El Khassibi';
+    container.innerHTML = '<div class="container project-loading"><p class="eyebrow">PROJECT NOT FOUND</p><h1>Let’s get you back<br>to the work.</h1><p>This project link is missing or invalid.</p><a class="button button--primary" href="../index.html#projects">Explore all projects ↗</a></div>';
+    return;
   }
-  if (new URLSearchParams(window.location.search).get("project") === "powergym" && powerGymCaseStudy) {
-    message.textContent = "A centralized gym management platform for members, subscriptions, payments, coaches, operations, and business analytics.";
-    powerGymCaseStudy.hidden = false;
-  }
-  document.title = `${project.name} | Soufiane`;
-} else if (title && message) {
-  title.textContent = "Project not found";
-  message.textContent = "This project link is invalid or no longer available. Return to the portfolio to browse the project list.";
-  document.title = "Project Not Found | Soufiane";
-}
+  container.innerHTML = window.PortfolioUI.renderProject(project, { prefix: '../' });
+  document.title = `${project.name} | Soufiane El Khassibi`;
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.content = project.summary;
+  // Keep canonical URLs specific to each project, not the generic project route.
+  const canonical = document.createElement('link');
+  canonical.rel = 'canonical';
+  canonical.href = `https://soufianeelkhassibi.online/project/index.html?project=${encodeURIComponent(project.id)}`;
+  document.head.append(canonical);
+})();
