@@ -1,4 +1,4 @@
-/* Project content preserved from the supplied portfolio. Edit this file to add details. */
+/* Project content. Unknown implementation details are intentionally not invented. */
 window.PORTFOLIO_PROJECTS = [
   {
     "id": "powergym",
@@ -23,7 +23,7 @@ window.PORTFOLIO_PROJECTS = [
         "caption": "Gym shop — product inventory and order management"
       }
     ],
-    "accent": "#8baaee",
+    "accent": "#a6a7ff",
     "tags": [
       "Management platform",
       "Business workflows",
@@ -44,7 +44,32 @@ window.PORTFOLIO_PROJECTS = [
     ],
     "kind": "project",
     "headline": "Run every part of your gym in one place.",
-    "summary": "A centralized gym management platform for members, subscriptions, payments, coaches, operations, and business analytics."
+    "summary": "A centralized gym management platform for members, subscriptions, payments, coaches, operations, and business analytics.",
+    "category": "Business platform",
+    "stack": [
+      "Laravel",
+      "PHP",
+      "MySQL"
+    ],
+    "stackSource": "Owner’s published gym SaaS portfolio: https://tkatek.github.io/soufiane/; full application stack, not a claim about the static demo.",
+    "brief": "A single workspace for everything that keeps a gym running.",
+    "challenge": "Members, payments, subscriptions and daily operations are difficult to manage when the information is scattered across separate tools.",
+    "approach": "Bring the essential workflows into one dashboard: memberships, financial tracking, schedules, inventory and analytics.",
+    "outcome": "A SaaS-style management product with connected operational screens and a clear overview of the business.",
+    "scope": [
+      "Member management",
+      "Plans & subscriptions",
+      "Payments & expenses",
+      "Coaches & schedules",
+      "Analytics dashboard",
+      "Shop & inventory"
+    ],
+    "featured": true,
+    "previewTags": [
+      "Laravel",
+      "PHP",
+      "MySQL"
+    ]
   },
   {
     "id": "marrakesh-beauty",
@@ -57,10 +82,23 @@ window.PORTFOLIO_PROJECTS = [
     "tags": [
       "Project preview"
     ],
-    "paragraphs": [],
+    "paragraphs": [
+      "A project from my portfolio archive."
+    ],
     "features": [],
     "kind": "project",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "A project from my portfolio archive.",
+    "stack": [],
+    "category": "Portfolio archive",
+    "brief": "Marrakesh Beauty",
+    "featured": false,
+    "detailStatus": "The implementation notes and screenshots for this project have not been added yet.",
+    "scope": [],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Portfolio archive"
+    ]
   },
   {
     "id": "invoiceflow",
@@ -75,7 +113,7 @@ window.PORTFOLIO_PROJECTS = [
         "caption": "InvoiceFlow — mobile app interface explorations"
       }
     ],
-    "accent": "#b7a1ef",
+    "accent": "#d2a6ff",
     "tags": [
       "Flutter",
       "Mobile application",
@@ -95,7 +133,28 @@ window.PORTFOLIO_PROJECTS = [
     ],
     "kind": "project",
     "headline": "Invoicing, made simpler.",
-    "summary": "A Flutter mobile app for helping businesses and independent professionals manage invoices with a clearer digital workflow."
+    "summary": "A Flutter mobile app for helping businesses and independent professionals manage invoices with a clearer digital workflow.",
+    "category": "Mobile product",
+    "stack": [
+      "Flutter"
+    ],
+    "stackSource": "Supplied original project/index.html case study.",
+    "brief": "Less paperwork. More room to run a business.",
+    "challenge": "Creating and organizing invoices manually interrupts the everyday work of independent professionals and small businesses.",
+    "approach": "Design a focused mobile workflow that brings invoices, products, clients and essential business operations together.",
+    "outcome": "A Flutter application and a complete interface exploration spanning dashboards, invoices, point of sale and expenses.",
+    "scope": [
+      "Invoice management",
+      "Client records",
+      "Product overview",
+      "Point of sale",
+      "Expenses",
+      "Dashboard"
+    ],
+    "featured": true,
+    "previewTags": [
+      "Flutter"
+    ]
   },
   {
     "id": "riadsoq",
@@ -108,10 +167,23 @@ window.PORTFOLIO_PROJECTS = [
     "tags": [
       "Project preview"
     ],
-    "paragraphs": [],
+    "paragraphs": [
+      "A project from my portfolio archive."
+    ],
     "features": [],
     "kind": "project",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "A project from my portfolio archive.",
+    "stack": [],
+    "category": "Portfolio archive",
+    "brief": "Riadsoq",
+    "featured": false,
+    "detailStatus": "The implementation notes and screenshots for this project have not been added yet.",
+    "scope": [],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Portfolio archive"
+    ]
   },
   {
     "id": "remtoo",
@@ -125,14 +197,36 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "Remtoo — project preview"
       }
     ],
-    "accent": "#6fd4c4",
+    "accent": "#94d9cd",
     "tags": [
       "Live website"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "Remtoo is a landing-page project in my web portfolio. The visual preview focuses on a welcoming, human-centered first impression.",
+      "Explore the published website to see the complete experience."
+    ],
+    "features": [
+      "Landing page",
+      "People-first presentation",
+      "Published web preview"
+    ],
     "kind": "project",
-    "summary": "Explore the live website and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "A landing-page project with a people-first visual direction and a live web preview.",
+    "category": "Web experience",
+    "stack": [],
+    "brief": "A welcoming digital first impression.",
+    "featured": true,
+    "scope": [
+      "Landing page",
+      "People-first presentation",
+      "Published web preview"
+    ],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Landing page",
+      "People-first presentation"
+    ]
   },
   {
     "id": "boston-english-center",
@@ -145,10 +239,23 @@ window.PORTFOLIO_PROJECTS = [
     "tags": [
       "Platform contribution"
     ],
-    "paragraphs": [],
+    "paragraphs": [
+      "An English-learning platform contribution from my project collection."
+    ],
     "features": [],
     "kind": "project",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "An English-learning platform contribution from my project collection.",
+    "stack": [],
+    "category": "Portfolio archive",
+    "brief": "Boston English Center",
+    "featured": false,
+    "detailStatus": "The implementation notes and screenshots for this project have not been added yet.",
+    "scope": [],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Portfolio archive"
+    ]
   },
   {
     "id": "blossom-word-bloom",
@@ -161,10 +268,23 @@ window.PORTFOLIO_PROJECTS = [
     "tags": [
       "Project preview"
     ],
-    "paragraphs": [],
+    "paragraphs": [
+      "A word-game project from my interactive collection."
+    ],
     "features": [],
     "kind": "game",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "A word-game project from my interactive collection.",
+    "stack": [],
+    "category": "Portfolio archive",
+    "brief": "Blossom / Word Bloom",
+    "featured": false,
+    "detailStatus": "The implementation notes and screenshots for this project have not been added yet.",
+    "scope": [],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Portfolio archive"
+    ]
   },
   {
     "id": "english-grammar-game",
@@ -182,14 +302,38 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "English Grammar Game — project preview"
       }
     ],
-    "accent": "#f4bf70",
+    "accent": "#bfadff",
     "tags": [
       "Live game"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "English Grammar Game explores a more playful way to practise English. The supplied visuals show Grammar Quest’s adventure-themed interface and interactive gameplay.",
+      "The live game is available to explore directly."
+    ],
+    "features": [
+      "Grammar practice",
+      "Interactive challenges",
+      "Adventure-style interface",
+      "Playable browser demo"
+    ],
     "kind": "game",
-    "summary": "Explore the live game and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "An interactive, grammar-focused game that turns English practice into a playful visual experience.",
+    "category": "Interactive game",
+    "stack": [],
+    "brief": "English practice, with a little adventure.",
+    "featured": true,
+    "scope": [
+      "Grammar practice",
+      "Interactive challenges",
+      "Adventure-style interface",
+      "Playable browser demo"
+    ],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Grammar practice",
+      "Interactive challenges"
+    ]
   },
   {
     "id": "cursor-agency-concept",
@@ -202,10 +346,23 @@ window.PORTFOLIO_PROJECTS = [
     "tags": [
       "Agency concept"
     ],
-    "paragraphs": [],
+    "paragraphs": [
+      "An agency website concept from my project collection."
+    ],
     "features": [],
     "kind": "project",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "An agency website concept from my project collection.",
+    "stack": [],
+    "category": "Portfolio archive",
+    "brief": "Cursor",
+    "featured": false,
+    "detailStatus": "The implementation notes and screenshots for this project have not been added yet.",
+    "scope": [],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Portfolio archive"
+    ]
   },
   {
     "id": "tourism-amanar",
@@ -219,14 +376,35 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "Tourism Amanar — project preview"
       }
     ],
-    "accent": "#d2bc8d",
+    "accent": "#ffcc9b",
     "tags": [
       "Live website"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "Tourism Amanar is a published tourism website included in my portfolio. The project preview uses destination photography to introduce the travel experience."
+    ],
+    "features": [
+      "Tourism website",
+      "Destination photography",
+      "Live web experience"
+    ],
     "kind": "project",
-    "summary": "Explore the live website and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "A tourism website with destination imagery and a live experience to explore.",
+    "category": "Travel website",
+    "stack": [],
+    "brief": "A window into the next adventure.",
+    "featured": true,
+    "scope": [
+      "Tourism website",
+      "Destination photography",
+      "Live web experience"
+    ],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Tourism website",
+      "Destination photography"
+    ]
   },
   {
     "id": "django-projects",
@@ -240,10 +418,33 @@ window.PORTFOLIO_PROJECTS = [
       "Django",
       "Python"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "A collection of Django and Python experiments listed in my portfolio."
+    ],
+    "features": [
+      "Django",
+      "Python",
+      "Framework exploration"
+    ],
     "kind": "experiment",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "Framework experiments exploring Python and Django.",
+    "category": "Engineering experiments",
+    "stack": [
+      "Django",
+      "Python"
+    ],
+    "brief": "Django Projects",
+    "featured": false,
+    "scope": [
+      "Django",
+      "Python",
+      "Framework exploration"
+    ],
+    "stackSource": "Supplied portfolio project name or description.",
+    "previewTags": [
+      "Django",
+      "Python"
+    ]
   },
   {
     "id": "laravel-saas-experiments",
@@ -257,10 +458,31 @@ window.PORTFOLIO_PROJECTS = [
       "Laravel",
       "SaaS"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "A collection of Laravel SaaS experiments listed in my portfolio."
+    ],
+    "features": [
+      "Laravel",
+      "SaaS concepts",
+      "Product exploration"
+    ],
     "kind": "experiment",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "Laravel experiments around SaaS-style product development.",
+    "category": "Engineering experiments",
+    "stack": [
+      "Laravel"
+    ],
+    "brief": "Laravel SaaS Experiments",
+    "featured": false,
+    "scope": [
+      "Laravel",
+      "SaaS concepts",
+      "Product exploration"
+    ],
+    "stackSource": "Supplied portfolio project name or description.",
+    "previewTags": [
+      "Laravel"
+    ]
   },
   {
     "id": "n8n-automation-experiments",
@@ -274,10 +496,31 @@ window.PORTFOLIO_PROJECTS = [
       "n8n",
       "Automation"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "An exploration of workflow automation using n8n, listed in my portfolio."
+    ],
+    "features": [
+      "n8n",
+      "Workflow automation",
+      "Connected tools"
+    ],
     "kind": "experiment",
-    "summary": "Part of my portfolio of products, platforms, concepts, and technical explorations. The detailed project story has not been published yet."
+    "summary": "Experiments with connected tools and automated workflows.",
+    "category": "Automation experiments",
+    "stack": [
+      "n8n"
+    ],
+    "brief": "n8n Automation Experiments",
+    "featured": false,
+    "scope": [
+      "n8n",
+      "Workflow automation",
+      "Connected tools"
+    ],
+    "stackSource": "Supplied portfolio project name or description.",
+    "previewTags": [
+      "n8n"
+    ]
   },
   {
     "id": "definite-dash-game",
@@ -291,14 +534,45 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "Definite Dash — project preview"
       }
     ],
-    "accent": "#8ed7bf",
+    "accent": "#bce489",
     "tags": [
       "Live game"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "Definite Dash brings English practice into a runner-style browser game. The player moves through a bright game environment and makes language-related decisions along the way.",
+      "The project separates its game engine, interface and question data, using HTML, CSS, JavaScript and JSON."
+    ],
+    "features": [
+      "Runner-style gameplay",
+      "English practice",
+      "JavaScript game engine",
+      "JSON question data",
+      "Browser-based experience"
+    ],
     "kind": "game",
-    "summary": "Explore the live game and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "A browser-based English-learning runner that combines quick decisions with a colorful game world.",
+    "category": "Interactive game",
+    "stack": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "JSON"
+    ],
+    "stackSource": "Supplied prior Definite Dash project structure: css/game.css, js/engine.js, js/game.js, data/game-data.json.",
+    "brief": "Run, react, and learn along the way.",
+    "featured": true,
+    "scope": [
+      "Runner-style gameplay",
+      "English practice",
+      "JavaScript game engine",
+      "JSON question data",
+      "Browser-based experience"
+    ],
+    "previewTags": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ]
   },
   {
     "id": "perfume-store",
@@ -316,14 +590,35 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "Perfume Store — project preview"
       }
     ],
-    "accent": "#d5ad89",
+    "accent": "#e8b69c",
     "tags": [
       "Live website"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "Perfume Store is a storefront project in my collection. Explore the product presentation and the published website."
+    ],
+    "features": [
+      "Fragrance storefront",
+      "Product presentation",
+      "Live web preview"
+    ],
     "kind": "project",
-    "summary": "Explore the live website and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "A perfume storefront project with an available visual preview and published website.",
+    "category": "Storefront",
+    "stack": [],
+    "brief": "A considered presentation for a fragrance collection.",
+    "featured": false,
+    "scope": [
+      "Fragrance storefront",
+      "Product presentation",
+      "Live web preview"
+    ],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Fragrance storefront",
+      "Product presentation"
+    ]
   },
   {
     "id": "cap-store",
@@ -337,14 +632,35 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "Cap Store — project preview"
       }
     ],
-    "accent": "#a8c1dc",
+    "accent": "#b0c7f5",
     "tags": [
       "Live website"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "Cap Store explores an online product presentation for caps. The project’s published website is available to browse."
+    ],
+    "features": [
+      "Product storefront",
+      "Cap collection",
+      "Live web preview"
+    ],
     "kind": "project",
-    "summary": "Explore the live website and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "A cap-store website with a product-led visual presentation and live preview.",
+    "category": "Storefront",
+    "stack": [],
+    "brief": "A storefront with character.",
+    "featured": false,
+    "scope": [
+      "Product storefront",
+      "Cap collection",
+      "Live web preview"
+    ],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Product storefront",
+      "Cap collection"
+    ]
   },
   {
     "id": "jewelry-store",
@@ -358,13 +674,34 @@ window.PORTFOLIO_PROJECTS = [
         "alt": "Jewelry Store — project preview"
       }
     ],
-    "accent": "#d0b185",
+    "accent": "#e9d095",
     "tags": [
       "Live website"
     ],
-    "paragraphs": [],
-    "features": [],
+    "paragraphs": [
+      "Jewelry Store presents a jewelry collection through a dedicated storefront. Explore the live website for the full presentation."
+    ],
+    "features": [
+      "Jewelry collection",
+      "Product imagery",
+      "Live web preview"
+    ],
     "kind": "project",
-    "summary": "Explore the live website and the available project previews. A detailed technical case study has not been published yet."
+    "summary": "A jewelry storefront project with product imagery and a published web experience.",
+    "category": "Storefront",
+    "stack": [],
+    "brief": "Let the details do the talking.",
+    "featured": false,
+    "scope": [
+      "Jewelry collection",
+      "Product imagery",
+      "Live web preview"
+    ],
+    "stackSource": "",
+    "stackNote": "The technology stack is not specified in the supplied project notes.",
+    "previewTags": [
+      "Jewelry collection",
+      "Product imagery"
+    ]
   }
 ];

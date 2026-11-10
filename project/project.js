@@ -1,23 +1,19 @@
-/* Dedicated, shareable project pages. Uses the same data as the animated viewer. */
-(() => {
+(function () {
   'use strict';
-  const container = document.querySelector('#case-study-main');
-  const data = Array.isArray(window.PORTFOLIO_PROJECTS) ? window.PORTFOLIO_PROJECTS : [];
-  const id = new URLSearchParams(window.location.search).get('project');
-  const project = data.find(item => item.id === id);
-  if (!container || !window.PortfolioUI) return;
+  var params = new URLSearchParams(location.search), id = params.get('project');
+  var project = (window.PORTFOLIO_PROJECTS || []).find(function (item) { return item.id === id; });
+  var root = document.getElementById('case-study-main');
+  if (!root) return;
   if (!project) {
-    document.title = 'Project Not Found | Soufiane El Khassibi';
-    container.innerHTML = '<div class="container project-loading"><p class="eyebrow">PROJECT NOT FOUND</p><h1>Let’s get you back<br>to the work.</h1><p>This project link is missing or invalid.</p><a class="button button--primary" href="../index.html#projects">Explore all projects ↗</a></div>';
-    return;
+    root.innerHTML = '<div class="wrap project-loading"><p class="eyebrow">Project collection</p><h1>Project not found.</h1><p>This link does not match an available project. Explore the complete portfolio below.</p><a class="button button-primary" href="../index.html#projects">Explore all projects ↗</a></div>';
+    document.title = 'Project not found | Soufiane El Khassibi'; return;
   }
-  container.innerHTML = window.PortfolioUI.renderProject(project, { prefix: '../' });
-  document.title = `${project.name} | Soufiane El Khassibi`;
-  const description = document.querySelector('meta[name="description"]');
-  if (description) description.content = project.summary;
-  // Keep canonical URLs specific to each project, not the generic project route.
-  const canonical = document.createElement('link');
-  canonical.rel = 'canonical';
-  canonical.href = `https://soufianeelkhassibi.online/project/index.html?project=${encodeURIComponent(project.id)}`;
-  document.head.append(canonical);
+  root.innerHTML = window.ProjectView.render(project, { prefix:'../', modal:false });
+  document.title = project.name + ' | Soufiane El Khassibi';
+  var meta = document.querySelector('meta[name="description"]'); if (meta) meta.content = project.summary;
+  var m = window.PortfolioMotion;
+  if (m && !m.reduced) {
+    m.animate(root.querySelector('.detail-heading'), [{ opacity:0,transform:'translateY(18px)' },{ opacity:1,transform:'translateY(0px)' }], {duration:650});
+    m.animate(root.querySelector('.detail-cover'), [{ opacity:0,transform:'translateY(30px)' },{ opacity:1,transform:'translateY(0px)' }], {duration:800,delay:100});
+  }
 })();
